@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
         //initialize the button
         //Button nextButton = (Button)findViewById(R.id.nextButton);
-        //added comment for git
+        //removed a comment I had personal issues with
 
         //initialize simple dadVice String array here for now
         ArrayList<String> dadVice = new ArrayList<>();
