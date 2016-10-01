@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    //todo find a good place/create a repo text file for dadvices (should be under res)
     //todo create DadVice class - the class should read from a text file, line by line
     //todo initialize array list for DadVice here
 
@@ -40,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         //now, display the dadVice one by one
         //ref: https://developer.android.com/guide/topics/ui/declaring-layout.html
         //seems like using a list-view with an adapter, limited to 1 item is the way to go
-        //todo implement the ArrayAdapter as a SimpleCursorAdapter and eliminate the button
+        //no, keep using the list, that way it's a more continuous UI
 
         //initialize ArrayAdapter
         ArrayAdapter<String> myAdapter = new ArrayAdapter<>(this,
@@ -48,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
 
         //initialize ListView
         ListView myListView = (ListView)findViewById(R.id.listView);
-        //todo implement new v17 requirements and make activity_main.xml the default
 
         //connect myListView with myAdapter
         myListView.setAdapter(myAdapter);
