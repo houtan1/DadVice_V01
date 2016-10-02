@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    //todo find a good place/create a repo text file for dadvices (should be under res)
+    //created a DB text file for dadvices, implemented assets folder
     //todo create DadVice class - the class should read from a text file, line by line
     //todo initialize array list for DadVice here
 
