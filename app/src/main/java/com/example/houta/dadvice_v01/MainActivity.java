@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -53,4 +54,20 @@ public class MainActivity extends AppCompatActivity {
         //connect myListView with myAdapter
         myListView.setAdapter(myAdapter);
     }
+
+    /*
+    This function takes an input arraylist and then randomizes it
+    https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html
+     */
+    ArrayList<String> randomizer_ArrayList(ArrayList<String> input_string)
+    {
+        //Input parameters to randomizer
+        ArrayList<String> randomized_string = new ArrayList<>();//used to hold output
+        Random randomIntGen = new Random(); //uses java.util.Random to create random index
+        int input_string_size = input_string.size();
+
+
+        return randomized_string;
+    }
 }
+
