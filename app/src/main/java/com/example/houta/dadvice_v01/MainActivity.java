@@ -2,28 +2,65 @@ package com.example.houta.dadvice_v01;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
 
 public class MainActivity extends AppCompatActivity {
 
     //created a DB text file for dadvices, implemented assets folder
     //todo create DadVice class - the class should read from a text file, line by line
-    //todo initialize array list for DadVice here
+    //did not create it as a class, perhaps I should
+    //initialized array list for DadVice
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //try using BufferedReader here
+        //ref http://stackoverflow.com/questions/24291721/reading-a-text-file-line-by-line-in-android
+        //works!
+        //move string array up here and push these lines to it
+        ArrayList<String> dadVice = new ArrayList<>();
+
+        BufferedReader reader;
+        try {
+            final InputStream file = getAssets().open("dadViceDB.txt");
+            reader = new BufferedReader(new InputStreamReader(file));
+            /*
+            String line = reader.readLine();
+            while (line != null) {
+                Log.d("reading: ", line);
+                line = reader.readLine();
+            }
+            */
+            String line = reader.readLine();
+            dadVice.add(line);
+            while (line != null){
+                line = reader.readLine();
+                if (line != null) {
+                    dadVice.add(line);
+                }
+            }
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+
         //initialize the button
         //Button nextButton = (Button)findViewById(R.id.nextButton);
         //removed a comment I had personal issues with
 
         //initialize simple dadVice String array here for now
+        /*
         ArrayList<String> dadVice = new ArrayList<>();
         dadVice.add("DadVice1 \n \n \n \n \n \n \n DadVice2 \n \n \n \n \n \n \n \n \n");
         dadVice.add("DadVice2 \n \n \n \n \n \n \n DadVice2 \n \n \n \n \n \n \n \n \n");
@@ -37,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
         dadVice.add("DadVice1 \n \n \n \n \n \n \n DadVice1 \n \n \n \n \n \n \n \n \n");
         dadVice.add("DadVice2 \n \n \n \n \n \n \n DadVice2 \n \n \n \n \n \n \n \n \n");
         dadVice.add("DadVice3 \n \n \n \n \n \n \n DadVice3 \n \n \n \n \n \n \n \n \n");
+        */
 
         //now, display the dadVice one by one
         //ref: https://developer.android.com/guide/topics/ui/declaring-layout.html
