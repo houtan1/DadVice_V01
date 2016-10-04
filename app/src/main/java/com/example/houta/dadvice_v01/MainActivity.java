@@ -7,6 +7,8 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -49,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
         //initialize ArrayAdapter
         ArrayAdapter<String> myAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, randomized_test_list);//dadVice);
+                android.R.layout.simple_list_item_1, dadVice);
 
         //initialize ListView
         ListView myListView = (ListView)findViewById(R.id.listView);
@@ -60,24 +62,11 @@ public class MainActivity extends AppCompatActivity {
 
     /*
     This function takes an input arraylist and then randomizes it
-    https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html
-     */
+    */
     ArrayList<String> randomize_ArrayList(ArrayList<String> input_array)
     {
-        //Input parameters to randomizer
-        ArrayList<String> randomized_array = input_array;//used to hold output
-        Random randomIntGen = new Random(); //uses java.util.Random to create random index
-        int input_array_size = input_array.size();//holds length of input array
-        int random;//holds index of random array, changes on each iteration of for loop
-
-        //iterates through all of input_array, assigning them random indexes
-        for(int counter = 0; counter < input_array_size; ++counter)
-        {
-            random = randomIntGen.nextInt(input_array_size);
-            randomized_array.set(random, input_array.get(counter));
-        }
-
-        return randomized_array;
+        long seed = System.nanoTime();
+        Collections.shuffle(input_array, new Random(seed));
+        return input_array;
     }
 }
-
