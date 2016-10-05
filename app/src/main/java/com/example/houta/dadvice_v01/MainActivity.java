@@ -7,6 +7,9 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,17 +29,20 @@ public class MainActivity extends AppCompatActivity {
         //initialize simple dadVice String array here for now
         ArrayList<String> dadVice = new ArrayList<>();
         dadVice.add("DadVice1 \n \n \n \n \n \n \n DadVice2 \n \n \n \n \n \n \n \n \n");
-        dadVice.add("DadVice2 \n \n \n \n \n \n \n DadVice2 \n \n \n \n \n \n \n \n \n");
-        dadVice.add("DadVice3 \n \n \n \n \n \n \n DadVice3 \n \n \n \n \n \n \n \n \n");
-        dadVice.add("DadVice1 \n \n \n \n \n \n \n DadVice1 \n \n \n \n \n \n \n \n \n");
-        dadVice.add("DadVice2 \n \n \n \n \n \n \n DadVice2 \n \n \n \n \n \n \n \n \n");
-        dadVice.add("DadVice3 \n \n \n \n \n \n \n DadVice3 \n \n \n \n \n \n \n \n \n");
-        dadVice.add("DadVice1 \n \n \n \n \n \n \n DadVice1 \n \n \n \n \n \n \n \n \n");
-        dadVice.add("DadVice2 \n \n \n \n \n \n \n DadVice2 \n \n \n \n \n \n \n \n \n");
-        dadVice.add("DadVice3 \n \n \n \n \n \n \n DadVice3 \n \n \n \n \n \n \n \n \n");
-        dadVice.add("DadVice1 \n \n \n \n \n \n \n DadVice1 \n \n \n \n \n \n \n \n \n");
-        dadVice.add("DadVice2 \n \n \n \n \n \n \n DadVice2 \n \n \n \n \n \n \n \n \n");
-        dadVice.add("DadVice3 \n \n \n \n \n \n \n DadVice3 \n \n \n \n \n \n \n \n \n");
+        dadVice.add("DadVice3 \n \n \n \n \n \n \n DadVice4 \n \n \n \n \n \n \n \n \n");
+        dadVice.add("DadVice5 \n \n \n \n \n \n \n DadVice6 \n \n \n \n \n \n \n \n \n");
+        dadVice.add("DadVice7 \n \n \n \n \n \n \n DadVice8 \n \n \n \n \n \n \n \n \n");
+        dadVice.add("DadVice9 \n \n \n \n \n \n \n DadVice10 \n \n \n \n \n \n \n \n \n");
+        dadVice.add("DadVice11 \n \n \n \n \n \n \n DadVice12 \n \n \n \n \n \n \n \n \n");
+        dadVice.add("DadVice13 \n \n \n \n \n \n \n DadVice14 \n \n \n \n \n \n \n \n \n");
+        dadVice.add("DadVice15 \n \n \n \n \n \n \n DadVice16 \n \n \n \n \n \n \n \n \n");
+        dadVice.add("DadVice17 \n \n \n \n \n \n \n DadVice18 \n \n \n \n \n \n \n \n \n");
+        dadVice.add("DadVice19 \n \n \n \n \n \n \n DadVice20 \n \n \n \n \n \n \n \n \n");
+        dadVice.add("DadVice21 \n \n \n \n \n \n \n DadVice22 \n \n \n \n \n \n \n \n \n");
+        dadVice.add("DadVice23 \n \n \n \n \n \n \n DadVice24 \n \n \n \n \n \n \n \n \n");
+
+        //testing randomizer here
+        ArrayList<String> randomized_test_list = randomize_ArrayList(dadVice);
 
         //now, display the dadVice one by one
         //ref: https://developer.android.com/guide/topics/ui/declaring-layout.html
@@ -52,5 +58,15 @@ public class MainActivity extends AppCompatActivity {
 
         //connect myListView with myAdapter
         myListView.setAdapter(myAdapter);
+    }
+
+    /*
+    This function takes an input arraylist and then randomizes it
+    */
+    ArrayList<String> randomize_ArrayList(ArrayList<String> input_array)
+    {
+        long seed = System.nanoTime();
+        Collections.shuffle(input_array, new Random(seed));
+        return input_array;
     }
 }
