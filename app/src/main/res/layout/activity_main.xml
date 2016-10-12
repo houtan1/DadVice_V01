@@ -9,17 +9,28 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.houta.dadvice_v01.MainActivity">
 
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerViewId"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+        </android.support.v7.widget.RecyclerView>
 
         <ListView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:id="@+id/listView"
             android:layout_gravity="bottom|center_horizontal"
-            android:layout_weight="1" />
+            android:layout_weight="1" >
+        </ListView>
+
 <!--
         <Button
             android:layout_width="match_parent"
