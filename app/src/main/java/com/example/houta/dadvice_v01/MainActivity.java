@@ -17,22 +17,47 @@ import java.util.Collections;
 import java.util.Random;
 
 public class MainActivity extends Activity {
+    // ref: https://developer.android.com/training/material/lists-cards.html
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerViewId);
+
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
+        mRecyclerView.setHasFixedSize(true);
+
+        // use a linear layout manager for RecyclerView
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        //to test with
+        String[] myDataset = {
+                "string 1",
+                "string 2",
+                "string 3"
+        };
+
+
+        // specify an adapter (create it in a new class file)
+        mAdapter = new MyAdapter(myDataset);
+        mRecyclerView.setAdapter(mAdapter);
 
         //RecyclerView and LinearLayoutManager
         //ref: https://www.binpress.com/tutorial/android-l-recyclerview-and-cardview-tutorial/156
         //maybe refactor as it's own class?
-
+        /*
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerViewId);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
-
+        */
         //todo follow guidance of
         // http://icetea09.com/blog/2014/12/19/android-cardview-and-recyclerview-in-material-design/
         // and http://stackoverflow.com/questions/31377100/how-to-use-recyclerview-and-cardview
