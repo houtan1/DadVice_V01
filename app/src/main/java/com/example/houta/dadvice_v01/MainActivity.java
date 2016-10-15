@@ -80,7 +80,7 @@ public class MainActivity extends Activity {
         randomize_ArrayList(dadVice);
 
         //display dadVice
-        displayArrayList(dadVice);
+        //displayArrayList(dadVice);
     }
 
     /*
@@ -128,7 +128,7 @@ public class MainActivity extends Activity {
     //ref: https://developer.android.com/guide/topics/ui/declaring-layout.html
     //used right click, extract, method to create this method
     */
-
+/*
     private void displayArrayList(ArrayList<String> inputArray) {
         //initialize ArrayAdapter
         ArrayAdapter<String> myAdapter = new ArrayAdapter<>(this,
@@ -140,5 +140,5 @@ public class MainActivity extends Activity {
         //connect myListView with myAdapter
         myListView.setAdapter(myAdapter);
     }
-
+*/
 }

@@ -21,9 +21,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
         public TextView mTextView;
-        public ViewHolder(TextView v){
+        public ViewHolder(View v){
             super(v);
-            mTextView = v;
+            mTextView = (TextView) v.findViewById(R.id.textView2);
+            // ERROR HERE: Null Pointer Exception
         }
     }
 
@@ -32,14 +33,20 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         mDataset = myDataset;
     }
 
-    // create new views (invoked by layout manager
+    // create new views (invoked by layout manager)
     @Override
     public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
         // create a new view
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_main, parent, false);
+        View v = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.activity_main, parent, false);
         // set the view's size, margins, paddings, and layout parameters here
 
-        //ERROR HERE
+        // old ERROR HERE
+        // old Solved by adding a (TextView) cast at v
+        // solution: http://stackoverflow.com/questions/27450598/android-widget-textview-cannot-be-applied-to-android-view-view
+        // http://stackoverflow.com/questions/28407768/android-widget-linearlayout-cannot-be-cast-to-android-widget-textview-in-recycle
+        // http://stackoverflow.com/questions/34428590/attach-textview-to-recyclerview
+        // http://stackoverflow.com/questions/218384/what-is-a-nullpointerexception-and-how-do-i-fix-it
         ViewHolder vh = new ViewHolder(v);
         return vh;
     }
