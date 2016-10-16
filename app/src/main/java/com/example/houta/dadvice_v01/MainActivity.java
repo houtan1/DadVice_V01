@@ -19,7 +19,8 @@ import java.util.Random;
 public class MainActivity extends Activity {
     // ref: https://developer.android.com/training/material/lists-cards.html
     private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
+    //private RecyclerView.Adapter mAdapter;
+    private CardAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
     @Override
@@ -43,9 +44,15 @@ public class MainActivity extends Activity {
                 "string 3"
         };
 
+        //test
+        ArrayList<String> dadVice2 = new ArrayList<>();
+        readFromFile("dadViceDB.txt", dadVice2);
+        randomize_ArrayList(dadVice2);
 
         // specify an adapter (create it in a new class file)
-        mAdapter = new MyAdapter(myDataset);
+        //mAdapter = new MyAdapter(dadVice2);
+        //mRecyclerView.setAdapter(mAdapter);
+        mAdapter = new CardAdapter(dadVice2);
         mRecyclerView.setAdapter(mAdapter);
 
         //RecyclerView and LinearLayoutManager

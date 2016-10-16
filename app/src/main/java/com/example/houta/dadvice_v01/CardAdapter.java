@@ -9,10 +9,10 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 /**
- * Created by houta on 10/12/2016.
+ * Created by houta on 10/15/2016.
  */
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
+public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
     //private String[] mDataset;
     private ArrayList<String> mDataset;
 
@@ -26,7 +26,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         public TextView mTextView;
         public ViewHolder(View v){
             super(v);
-            mTextView = (TextView) v.findViewById(R.id.textView2);
+            mTextView = (TextView) v.findViewById(R.id.textView);
             // ERROR HERE: Null Pointer Exception
         }
     }
@@ -35,16 +35,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     //public MyAdapter(String[] myDataset) {
     //    mDataset = myDataset;
     //}
-    public MyAdapter(ArrayList<String> myDataset) {
+    public CardAdapter(ArrayList<String> myDataset) {
         mDataset = myDataset;
     }
 
     // create new views (invoked by layout manager)
     @Override
-    public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
+    public CardAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
         // create a new view
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.text_view , parent, false);
+                .inflate(R.layout.card_view , parent, false);
         // set the view's size, margins, paddings, and layout parameters here
 
         // old ERROR HERE
@@ -53,13 +53,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         // http://stackoverflow.com/questions/28407768/android-widget-linearlayout-cannot-be-cast-to-android-widget-textview-in-recycle
         // http://stackoverflow.com/questions/34428590/attach-textview-to-recyclerview
         // http://stackoverflow.com/questions/218384/what-is-a-nullpointerexception-and-how-do-i-fix-it
-        ViewHolder vh = new ViewHolder(v);
+        CardAdapter.ViewHolder vh = new CardAdapter.ViewHolder(v);
         return vh;
     }
 
     // replace the contents of a view (invoked by layout manager)
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(CardAdapter.ViewHolder holder, int position) {
         // get element from your dataset at this position
         // replace the contents of the view with that element
         //holder.mTextView.setText(mDataset[position]);
