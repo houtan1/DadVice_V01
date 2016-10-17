@@ -19,7 +19,6 @@ import java.util.Random;
 public class MainActivity extends Activity {
     // ref: https://developer.android.com/training/material/lists-cards.html
     private RecyclerView mRecyclerView;
-    //private RecyclerView.Adapter mAdapter;
     private CardAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
@@ -37,46 +36,6 @@ public class MainActivity extends Activity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        //to test with
-        String[] myDataset = {
-                "string 1",
-                "string 2",
-                "string 3"
-        };
-
-        //test
-        ArrayList<String> dadVice2 = new ArrayList<>();
-        readFromFile("dadViceDB.txt", dadVice2);
-        randomize_ArrayList(dadVice2);
-
-        // specify an adapter (create it in a new class file)
-        //mAdapter = new MyAdapter(dadVice2);
-        //mRecyclerView.setAdapter(mAdapter);
-        mAdapter = new CardAdapter(dadVice2);
-        mRecyclerView.setAdapter(mAdapter);
-
-        //RecyclerView and LinearLayoutManager
-        //ref: https://www.binpress.com/tutorial/android-l-recyclerview-and-cardview-tutorial/156
-        //maybe refactor as it's own class?
-        /*
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerViewId);
-        recyclerView.setHasFixedSize(true);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        */
-        //todo follow guidance of
-        // http://icetea09.com/blog/2014/12/19/android-cardview-and-recyclerview-in-material-design/
-        // and http://stackoverflow.com/questions/31377100/how-to-use-recyclerview-and-cardview
-        // also http://www.101apps.co.za/index.php/articles/android-s-recyclerview-and-cardview-widgets.html
-        // and finally https://www.binpress.com/tutorial/android-l-recyclerview-and-cardview-tutorial/156
-        // android dev https://developer.android.com/samples/CardView/src/com.example.android.cardview/CardViewFragment.html
-        // official https://developer.android.com/training/material/lists-cards.html
-
-        // to implement a working RecyclerView first
-        // then connect it to use the card_view.xml
-
-
         //create a new arrayList
         ArrayList<String> dadVice = new ArrayList<>();
 
@@ -86,8 +45,10 @@ public class MainActivity extends Activity {
         //randomize dadVice
         randomize_ArrayList(dadVice);
 
-        //display dadVice
-        //displayArrayList(dadVice);
+        //specify an adapter
+        mAdapter = new CardAdapter(dadVice);
+        //display cards via RecyclerView and its CardAdapter
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     /*
@@ -121,31 +82,4 @@ public class MainActivity extends Activity {
         Collections.shuffle(input_array, new Random(seed));
         return input_array;
     }
-
-    /*
-    This is the old way. (pre-material design)
-    The new ListView is called RecyclerView and it has performance improvements
-    But we're interested in implementing our array as cards!
-    So we'll be using CardView
-    https://developer.android.com/reference/android/support/v7/widget/CardView.html
-    https://developer.android.com/training/material/lists-cards.html
-    */
-    /*
-    This method displays an arrayList
-    //ref: https://developer.android.com/guide/topics/ui/declaring-layout.html
-    //used right click, extract, method to create this method
-    */
-/*
-    private void displayArrayList(ArrayList<String> inputArray) {
-        //initialize ArrayAdapter
-        ArrayAdapter<String> myAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, inputArray);
-
-        //initialize ListView
-        ListView myListView = (ListView)findViewById(R.id.listView);
-
-        //connect myListView with myAdapter
-        myListView.setAdapter(myAdapter);
-    }
-*/
 }
