@@ -2,4 +2,5 @@
     <string name="app_name">DadVice_V01</string>
     <string name="next_dadvice">Next DadVice</string>
     <string name="cardTextValue">cardTextValue</string>
+    <string name="ad_unit_id"> ca-app-pub-3940256099942544/1072772517</string>
 </resources>

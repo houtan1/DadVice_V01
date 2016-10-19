@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
+
 public class MainActivity extends Activity {
     // ref: https://developer.android.com/training/material/lists-cards.html
     private RecyclerView mRecyclerView;
