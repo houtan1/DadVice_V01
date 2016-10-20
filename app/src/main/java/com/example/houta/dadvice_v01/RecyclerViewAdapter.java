@@ -48,7 +48,7 @@ class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         DadviceItemViewHolder(View view) {
             super(view);
-            dadvice_text = (TextView) view.findViewById(R.id.cardViewId);//TODO check this matches xml properly in card_view.xml
+            dadvice_text = (TextView) view.findViewById(R.id.dadvice_textview);//TODO check this matches xml properly in card_view.xml
         }
     }
 

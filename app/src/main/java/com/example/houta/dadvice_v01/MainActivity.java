@@ -23,7 +23,6 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.NativeExpressAdView;
 
-//// TODO: 19/10/16 ADD import of adlistener, adrequest, adsize, nativeexpressAdView 
 
 public class MainActivity extends Activity {
     // A Native Express ad is placed in every nth position in the RecyclerView.
@@ -40,7 +39,7 @@ public class MainActivity extends Activity {
 
     // ref: https://developer.android.com/training/material/lists-cards.html
     private RecyclerView mRecyclerView;
-    private CardAdapter mAdapter;
+    //private CardAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
     @Override
@@ -58,31 +57,35 @@ public class MainActivity extends Activity {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         //create a new arrayList
-        ArrayList<String> dadVice = new ArrayList<>();
+        //ArrayList<String> dadVice = new ArrayList<>();
         ////////////////////////////////////////////////////////////////////////////////
         // Create a list containing menu items and Native Express ads.
         mRecyclerViewItems = new ArrayList<>();
     //    addMenuItems();
-        addNativeExpressAds();
-  //      setUpAndLoadNativeExpressAds();
-
-        // Specify an adapter.
-//        RecyclerView.Adapter adapter = new RecyclerViewAdapter(this, mRecyclerViewItems);
-      //  mRecyclerView.setAdapter(adapter);
-        /////////////////////////////////////////////////////////////////////////////
 
         //given file name and arrayList, reads from file and populates arrayList
-        StringreadFromFile("dadViceDB.txt", dadVice);//BACKUP NO ADS
+        //StringreadFromFile("dadViceDB.txt", dadVice);//BACKUP NO ADS
         readFromFile("dadViceDB.txt", mRecyclerViewItems);//NEW FUNCTION
+
         //randomize dadVice
-        Stringrandomize_ArrayList(dadVice);
+        //Stringrandomize_ArrayList(dadVice);
         //randomize dadVice
-        randomize_List(mRecyclerViewItems);
+        //randomize_List(mRecyclerViewItems);
+
+        addNativeExpressAds();
+        setUpAndLoadNativeExpressAds();
+
+        // Specify an adapter.
+        RecyclerView.Adapter adapter = new RecyclerViewAdapter(this, mRecyclerViewItems);
+        mRecyclerView.setAdapter(adapter);
+        /////////////////////////////////////////////////////////////////////////////
+
+
 
         //specify an adapter
-        mAdapter = new CardAdapter(dadVice);
+    //    mAdapter = new CardAdapter(dadVice);
         //display cards via RecyclerView and its CardAdapter
-        mRecyclerView.setAdapter(mAdapter);
+    //    mRecyclerView.setAdapter(mAdapter);
     }
 
     /**
@@ -112,7 +115,7 @@ public class MainActivity extends Activity {
                 // Set the ad size and ad unit ID for each Native Express ad in the items list.
                 for (int i = 0; i <= mRecyclerViewItems.size(); i += ITEMS_PER_AD) {
                     final NativeExpressAdView adView =
-                            (NativeExpressAdView) mRecyclerViewItems.get(i);
+                            (NativeExpressAdView) mRecyclerViewItems.get(i); //TODO casting string to adview error
                     AdSize adSize = new AdSize(
                             (int) (mRecyclerView.getWidth() / density),
                             NATIVE_EXPRESS_AD_HEIGHT);
