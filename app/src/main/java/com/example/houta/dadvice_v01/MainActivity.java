@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import com.google.android.gms.ads.NativeExpressAdView;
 
 //// TODO: 19/10/16 ADD import of adlistener, adrequest, adsize, nativeexpressAdView 
 
@@ -79,6 +80,20 @@ public class MainActivity extends Activity {
         //display cards via RecyclerView and its CardAdapter
         mRecyclerView.setAdapter(mAdapter);
     }
+
+    /**
+     * Adds Native Express ads to the items list.
+     */
+    private void addNativeExpressAds() {
+
+        // Loop through the items array and place a new Native Express ad in every ith position in
+        // the items List.
+        for (int i = 0; i <= mRecyclerViewItems.size(); i += ITEMS_PER_AD) {
+            final NativeExpressAdView adView = new NativeExpressAdView(MainActivity.this);
+            mRecyclerViewItems.add(i, adView);
+        }
+    }
+
 
     /*
     This method reads strings from a file and writes them to an ArrayList
