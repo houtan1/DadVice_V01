@@ -32,7 +32,7 @@ public class MainActivity extends Activity {
     private static final int NATIVE_EXPRESS_AD_HEIGHT = 150;
 
     // The Native Express ad unit ID.
-    private static final String AD_UNIT_ID = "ca-app-pub-3940256099942544/1072772517";
+    private static final String AD_UNIT_ID = "ca-app-pub-3940256099942544/1072772517"; //TODO remove and add our own ad account
 
     // List of Native Express ads and MenuItems that populate the RecyclerView.
     private List<Object> mRecyclerViewItems;
@@ -57,35 +57,21 @@ public class MainActivity extends Activity {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         //create a new arrayList
-        //ArrayList<String> dadVice = new ArrayList<>();
-        ////////////////////////////////////////////////////////////////////////////////
-        // Create a list containing menu items and Native Express ads.
         mRecyclerViewItems = new ArrayList<>();
-    //    addMenuItems();
 
         //given file name and arrayList, reads from file and populates arrayList
-        //StringreadFromFile("dadViceDB.txt", dadVice);//BACKUP NO ADS
-        readFromFile("dadViceDB.txt", mRecyclerViewItems);//NEW FUNCTION
+        readFromFile("dadViceDB.txt", mRecyclerViewItems);
 
         //randomize dadVice
-        //Stringrandomize_ArrayList(dadVice);
-        //randomize dadVice
-        //randomize_List(mRecyclerViewItems);
+        randomize_List(mRecyclerViewItems);
 
+        //set up and load ads
         addNativeExpressAds();
         setUpAndLoadNativeExpressAds();
 
-        // Specify an adapter.
+        // Specify adapter that supports cardview and adview
         RecyclerView.Adapter adapter = new RecyclerViewAdapter(this, mRecyclerViewItems);
         mRecyclerView.setAdapter(adapter);
-        /////////////////////////////////////////////////////////////////////////////
-
-
-
-        //specify an adapter
-    //    mAdapter = new CardAdapter(dadVice);
-        //display cards via RecyclerView and its CardAdapter
-    //    mRecyclerView.setAdapter(mAdapter);
     }
 
     /**
@@ -192,36 +178,6 @@ public class MainActivity extends Activity {
             ioe.printStackTrace();
         }
         return outputArray;
-    }
-    /*
-    This method reads strings from a file and writes them to an ArrayList
-    ref http://stackoverflow.com/questions/24291721/reading-a-text-file-line-by-line-in-android
-    */
-    private ArrayList<String> StringreadFromFile(String fileName, ArrayList<String> outputArray) {
-        BufferedReader reader;
-        try {
-            final InputStream file = getAssets().open(fileName);
-            reader = new BufferedReader(new InputStreamReader(file));
-            String line = reader.readLine();
-            outputArray.add(line);
-            while (line != null){
-                line = reader.readLine();
-                if (line != null) {
-                    outputArray.add(line);
-                }
-            }
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
-        return outputArray;
-    }
-    /*
-    This method takes an input arrayList and then randomizes it
-    */
-    private ArrayList<String> Stringrandomize_ArrayList(ArrayList<String> input_array) {
-        long seed = System.nanoTime();
-        Collections.shuffle(input_array, new Random(seed));
-        return input_array;
     }
 
     /*

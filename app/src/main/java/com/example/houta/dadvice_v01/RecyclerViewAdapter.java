@@ -107,10 +107,7 @@ class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         int viewType = getItemViewType(position);
         switch (viewType) {
             case DADVICE_VIEW_TYPE:
-//holder.mTextView.setText(mDataset.get(position));
-
                 DadviceItemViewHolder DadviceItemHolder = (DadviceItemViewHolder) holder;
-                //MenuItem menuItem = (MenuItem) mRecyclerViewItems.get(position);
                 String dadvice_item = mRecyclerViewItems.get(position).toString();
 
                 DadviceItemHolder.dadvice_text.setText(dadvice_item);
