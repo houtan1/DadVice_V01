@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.util.Log;
@@ -81,9 +83,13 @@ public class MainActivity extends Activity {
 
         // Loop through the items array and place a new Native Express ad in every ith position in
         // the items List.
-        for (int i = 0; i <= mRecyclerViewItems.size(); i += ITEMS_PER_AD) {
-            final NativeExpressAdView adView = new NativeExpressAdView(MainActivity.this);
-            mRecyclerViewItems.add(i, adView);
+        int i;
+        for (i = 0; i <= mRecyclerViewItems.size(); i=i+1){;//i += ITEMS_PER_AD) {
+            if((i % ITEMS_PER_AD) == 0) {
+                final NativeExpressAdView adView = new NativeExpressAdView(MainActivity.this);
+                mRecyclerViewItems.add(i, adView);
+            }
+
         }
     }
 
