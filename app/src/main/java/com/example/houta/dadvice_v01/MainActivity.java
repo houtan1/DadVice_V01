@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -43,6 +44,15 @@ public class MainActivity extends Activity {
     private RecyclerView mRecyclerView;
     //private CardAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+
+    /*
+inflates the options menu
+ */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.about_menu, menu);
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -195,3 +205,4 @@ This method takes an input arrayList and then randomizes it
         return input_array;
     }
 }
+
