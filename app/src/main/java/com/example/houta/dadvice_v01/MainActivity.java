@@ -63,7 +63,8 @@ inflates the options menu
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.about_menu:
-                return true;
+                //return true;
+                seeAboutMenu();
             case R.id.item2:
                 return true;
             default:
@@ -72,7 +73,7 @@ inflates the options menu
     }
 
     /** Called when the user clicks about menu button */
-    public void seeAboutMenu(View view) {
+    public void seeAboutMenu(){//View view) {
         Intent intent = new Intent(this, AboutActivity.class);
         //EditText editText = (EditText) findViewById(R.id.edit_message);
         //String message = editText.getText().toString();
