@@ -2,11 +2,18 @@ package com.example.houta.dadvice_v01;
 
 import android.app.Activity;
 //import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.util.Log;
 import java.io.BufferedReader;
@@ -41,6 +48,35 @@ public class MainActivity extends Activity {
     private RecyclerView mRecyclerView;
     //private CardAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+
+    /*
+inflates the options menu
+ */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.about_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.about_menu:
+                seeAboutMenu();
+                return true;
+            case R.id.item2:
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    /** Called when the user clicks about menu button */
+    public void seeAboutMenu(){
+        Intent intent = new Intent(this, AboutActivity.class);
+        startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,9 +117,13 @@ public class MainActivity extends Activity {
 
         // Loop through the items array and place a new Native Express ad in every ith position in
         // the items List.
-        for (int i = 0; i <= mRecyclerViewItems.size(); i += ITEMS_PER_AD) {
-            final NativeExpressAdView adView = new NativeExpressAdView(MainActivity.this);
-            mRecyclerViewItems.add(i, adView);
+        int i;
+        for (i = 0; i <= mRecyclerViewItems.size(); i=i+1){;//i += ITEMS_PER_AD) {
+            if((i % ITEMS_PER_AD) == 0) {
+                final NativeExpressAdView adView = new NativeExpressAdView(MainActivity.this);
+                mRecyclerViewItems.add(i, adView);
+            }
+
         }
     }
 
@@ -189,3 +229,4 @@ This method takes an input arrayList and then randomizes it
         return input_array;
     }
 }
+
