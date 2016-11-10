@@ -11,6 +11,7 @@
     tools:context="com.example.houta.dadvice_v01.AboutActivity">
 
     <TextView
+        android:autoLink="web"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:text="@string/AboutMenuContent"
