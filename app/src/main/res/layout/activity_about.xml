@@ -10,16 +10,14 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.houta.dadvice_v01.AboutActivity">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="Dummy About Menu"
-        android:ems="10"
-        android:layout_below="@+id/textView2"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="55dp"
-        android:layout_marginTop="98dp"
-        android:id="@+id/editText" />
+    <TextView
+        android:autoLink="web"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:text="@string/AboutMenuContent"
+        android:id="@+id/AboutMenuText"
+        android:minLines="2"
+        android:textSize="20dp"
+        android:scrollHorizontally="false" />
 
 </RelativeLayout>
