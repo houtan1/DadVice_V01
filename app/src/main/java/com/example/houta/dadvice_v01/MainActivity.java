@@ -33,7 +33,7 @@ import com.google.android.gms.ads.NativeExpressAdView;
 
 public class MainActivity extends Activity {
     // A Native Express ad is placed in every nth position in the RecyclerView.
-    public static final int ITEMS_PER_AD = 8;
+    public static final int ITEMS_PER_AD = 4;
 
     // The Native Express ad height.
     private static final int NATIVE_EXPRESS_AD_HEIGHT = 150;
@@ -105,6 +105,19 @@ inflates the options menu
         addNativeExpressAds();
         setUpAndLoadNativeExpressAds();
 
+        Log.e("TESTSTRING",mRecyclerViewItems.get(0).toString());
+        Log.e("TESTSTRING",mRecyclerViewItems.get(1).toString());
+        Log.e("TESTSTRING",mRecyclerViewItems.get(2).toString());
+        Log.e("TESTSTRING",mRecyclerViewItems.get(3).toString());
+        Log.e("TESTSTRING",mRecyclerViewItems.get(4).toString());
+        Log.e("TESTSTRING",mRecyclerViewItems.get(5).toString());
+        Log.e("TESTSTRING",mRecyclerViewItems.get(6).toString());
+        Log.e("TESTSTRING",mRecyclerViewItems.get(7).toString());
+        Log.e("TESTSTRING",mRecyclerViewItems.get(8).toString());
+        Log.e("TESTSTRING",mRecyclerViewItems.get(9).toString());
+        Log.e("TESTSTRING",mRecyclerViewItems.get(10).toString());
+        Log.e("TESTSTRING",mRecyclerViewItems.get(11).toString());
+
         // Specify adapter that supports cardview and adview
         RecyclerView.Adapter adapter = new RecyclerViewAdapter(this, mRecyclerViewItems);
         mRecyclerView.setAdapter(adapter);
@@ -118,8 +131,8 @@ inflates the options menu
         // Loop through the items array and place a new Native Express ad in every ith position in
         // the items List.
         int i;
-        for (i = 0; i <= mRecyclerViewItems.size(); i=i+1){;//i += ITEMS_PER_AD) {
-            if((i % ITEMS_PER_AD) == 0) {
+        for (i = 1; i <= mRecyclerViewItems.size(); i=i+1){;//i += ITEMS_PER_AD) {
+            if(((i % ITEMS_PER_AD) == 0)&&(i>0)) {
                 final NativeExpressAdView adView = new NativeExpressAdView(MainActivity.this);
                 mRecyclerViewItems.add(i, adView);
             }
@@ -139,9 +152,9 @@ inflates the options menu
             public void run() {
                 final float density = MainActivity.this.getResources().getDisplayMetrics().density;
                 // Set the ad size and ad unit ID for each Native Express ad in the items list.
-                for (int i = 0; i <= mRecyclerViewItems.size(); i += ITEMS_PER_AD) {
+                for (int i = ITEMS_PER_AD; i <= mRecyclerViewItems.size(); i += ITEMS_PER_AD) {
                     final NativeExpressAdView adView =
-                            (NativeExpressAdView) mRecyclerViewItems.get(i); //TODO casting string to adview error
+                            (NativeExpressAdView) mRecyclerViewItems.get(i);
                     AdSize adSize = new AdSize(
                             (int) (mRecyclerView.getWidth() / density),
                             NATIVE_EXPRESS_AD_HEIGHT);

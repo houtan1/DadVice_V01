@@ -2,6 +2,7 @@ package com.example.houta.dadvice_v01;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,8 +73,28 @@ class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
      */
     @Override
     public int getItemViewType(int position) {
-        return (position % MainActivity.ITEMS_PER_AD == 0) ? NATIVE_EXPRESS_AD_VIEW_TYPE
-                : DADVICE_VIEW_TYPE;
+        String testType;
+        int return_value;
+        if((position % MainActivity.ITEMS_PER_AD == 0)&&(position>0))
+        {
+            return_value = NATIVE_EXPRESS_AD_VIEW_TYPE;
+        }
+        else
+        {
+            return_value = DADVICE_VIEW_TYPE;
+        }
+
+        if(return_value == DADVICE_VIEW_TYPE)
+        {
+            testType = "DADVICE "+position;
+        }
+        else
+        {
+            testType = "AD "+position;
+        }
+        if(position < 12)Log.e("TESTSTRING2", testType);
+
+        return return_value;
     }
 
     /**
@@ -105,6 +126,7 @@ class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         int viewType = getItemViewType(position);
+
         switch (viewType) {
             case DADVICE_VIEW_TYPE:
                 DadviceItemViewHolder DadviceItemHolder = (DadviceItemViewHolder) holder;
