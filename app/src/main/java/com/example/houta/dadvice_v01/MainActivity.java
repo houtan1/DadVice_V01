@@ -33,7 +33,7 @@ import com.google.android.gms.ads.NativeExpressAdView;
 
 public class MainActivity extends Activity {
     // A Native Express ad is placed in every nth position in the RecyclerView.
-    public static final int ITEMS_PER_AD = 4;
+    public static final int ITEMS_PER_AD = 8;
 
     // The Native Express ad height.
     private static final int NATIVE_EXPRESS_AD_HEIGHT = 150;
@@ -105,19 +105,6 @@ inflates the options menu
         addNativeExpressAds();
         setUpAndLoadNativeExpressAds();
 
-        Log.e("TESTSTRING",mRecyclerViewItems.get(0).toString());
-        Log.e("TESTSTRING",mRecyclerViewItems.get(1).toString());
-        Log.e("TESTSTRING",mRecyclerViewItems.get(2).toString());
-        Log.e("TESTSTRING",mRecyclerViewItems.get(3).toString());
-        Log.e("TESTSTRING",mRecyclerViewItems.get(4).toString());
-        Log.e("TESTSTRING",mRecyclerViewItems.get(5).toString());
-        Log.e("TESTSTRING",mRecyclerViewItems.get(6).toString());
-        Log.e("TESTSTRING",mRecyclerViewItems.get(7).toString());
-        Log.e("TESTSTRING",mRecyclerViewItems.get(8).toString());
-        Log.e("TESTSTRING",mRecyclerViewItems.get(9).toString());
-        Log.e("TESTSTRING",mRecyclerViewItems.get(10).toString());
-        Log.e("TESTSTRING",mRecyclerViewItems.get(11).toString());
-
         // Specify adapter that supports cardview and adview
         RecyclerView.Adapter adapter = new RecyclerViewAdapter(this, mRecyclerViewItems);
         mRecyclerView.setAdapter(adapter);
@@ -163,7 +150,7 @@ inflates the options menu
                 }
 
                 // Load the first Native Express ad in the items list.
-                loadNativeExpressAd(0);
+                loadNativeExpressAd(ITEMS_PER_AD);
             }
         });
     }

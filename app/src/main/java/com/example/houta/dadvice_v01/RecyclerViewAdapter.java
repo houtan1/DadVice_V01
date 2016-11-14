@@ -73,7 +73,6 @@ class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
      */
     @Override
     public int getItemViewType(int position) {
-        String testType;
         int return_value;
         if((position % MainActivity.ITEMS_PER_AD == 0)&&(position>0))
         {
@@ -83,17 +82,6 @@ class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         {
             return_value = DADVICE_VIEW_TYPE;
         }
-
-        if(return_value == DADVICE_VIEW_TYPE)
-        {
-            testType = "DADVICE "+position;
-        }
-        else
-        {
-            testType = "AD "+position;
-        }
-        if(position < 12)Log.e("TESTSTRING2", testType);
-
         return return_value;
     }
 
