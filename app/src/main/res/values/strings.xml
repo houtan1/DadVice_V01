@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DadVice_V01</string>
+    <string name="app_name">DadVice</string>
     <string name="next_dadvice">Next DadVice</string>
     <string name="cardTextValue">cardTextValue</string>
     <string name="AboutMenuContent">"Dadvice is an app created by Burritocat. \n\nBurritocat is a Canadian company founded in 2016 with the intention of making apps and software that stand out from the crowd. Please see our website for more information! \n\nwww.burritocat.xyz"</string>

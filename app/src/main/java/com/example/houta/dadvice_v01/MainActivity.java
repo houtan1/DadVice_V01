@@ -65,8 +65,6 @@ inflates the options menu
             case R.id.about_menu:
                 seeAboutMenu();
                 return true;
-            case R.id.item2:
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
