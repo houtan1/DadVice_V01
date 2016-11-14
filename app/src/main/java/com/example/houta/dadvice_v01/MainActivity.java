@@ -118,8 +118,8 @@ inflates the options menu
         // Loop through the items array and place a new Native Express ad in every ith position in
         // the items List.
         int i;
-        for (i = 0; i <= mRecyclerViewItems.size(); i=i+1){;//i += ITEMS_PER_AD) {
-            if((i % ITEMS_PER_AD) == 0) {
+        for (i = 1; i <= mRecyclerViewItems.size(); i=i+1){;//i += ITEMS_PER_AD) {
+            if(((i % ITEMS_PER_AD) == 0)&&(i>0)) {
                 final NativeExpressAdView adView = new NativeExpressAdView(MainActivity.this);
                 mRecyclerViewItems.add(i, adView);
             }
@@ -139,9 +139,9 @@ inflates the options menu
             public void run() {
                 final float density = MainActivity.this.getResources().getDisplayMetrics().density;
                 // Set the ad size and ad unit ID for each Native Express ad in the items list.
-                for (int i = 0; i <= mRecyclerViewItems.size(); i += ITEMS_PER_AD) {
+                for (int i = ITEMS_PER_AD; i <= mRecyclerViewItems.size(); i += ITEMS_PER_AD) {
                     final NativeExpressAdView adView =
-                            (NativeExpressAdView) mRecyclerViewItems.get(i); //TODO casting string to adview error
+                            (NativeExpressAdView) mRecyclerViewItems.get(i);
                     AdSize adSize = new AdSize(
                             (int) (mRecyclerView.getWidth() / density),
                             NATIVE_EXPRESS_AD_HEIGHT);
@@ -150,7 +150,7 @@ inflates the options menu
                 }
 
                 // Load the first Native Express ad in the items list.
-                loadNativeExpressAd(0);
+                loadNativeExpressAd(ITEMS_PER_AD);
             }
         });
     }
