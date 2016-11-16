@@ -4,6 +4,7 @@ import android.app.Activity;
 //import android.support.v7.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -64,8 +65,6 @@ inflates the options menu
         switch (item.getItemId()) {
             case R.id.about_menu:
                 seeAboutMenu();
-                return true;
-            case R.id.item2:
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
