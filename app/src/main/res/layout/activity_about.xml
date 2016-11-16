@@ -11,7 +11,7 @@
     tools:context="com.example.houta.dadvice_v01.AboutActivity">
 
     <TextView
-        android:autoLink="web"
+        android:autoLink="web|email"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:text="@string/AboutMenuContent"
@@ -19,5 +19,4 @@
         android:minLines="2"
         android:textSize="20dp"
         android:scrollHorizontally="false" />
-
 </RelativeLayout>
