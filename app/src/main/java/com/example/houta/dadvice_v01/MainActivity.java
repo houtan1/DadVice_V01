@@ -2,7 +2,10 @@ package com.example.houta.dadvice_v01;
 
 import android.app.Activity;
 //import android.support.v7.app.AppCompatActivity;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutCompat;
@@ -34,7 +37,7 @@ import com.google.android.gms.ads.NativeExpressAdView;
 
 public class MainActivity extends Activity {
     // A Native Express ad is placed in every nth position in the RecyclerView.
-    public static final int ITEMS_PER_AD = 8;
+    public static final int ITEMS_PER_AD = 10;
 
     // The Native Express ad height.
     private static final int NATIVE_EXPRESS_AD_HEIGHT = 150;
@@ -101,12 +104,24 @@ inflates the options menu
         randomize_List(mRecyclerViewItems);
 
         //set up and load ads
-        addNativeExpressAds();
-        setUpAndLoadNativeExpressAds();
-
+        if(isNetworkAvailable())
+        {
+            addNativeExpressAds();
+            setUpAndLoadNativeExpressAds();
+        }
         // Specify adapter that supports cardview and adview
-        RecyclerView.Adapter adapter = new RecyclerViewAdapter(this, mRecyclerViewItems);
-        mRecyclerView.setAdapter(adapter);
+        //This is inefficient but more readable code and since computation is cheap it's better to strive for readable
+        if(isNetworkAvailable())
+        {
+            RecyclerView.Adapter adapter = new RecyclerViewAdapter(this, mRecyclerViewItems);
+            mRecyclerView.setAdapter(adapter);
+        }
+        else
+        {
+            RecyclerView.Adapter adapternointernet = new RecyclerViewAdapterNoInternet(this, mRecyclerViewItems);
+            mRecyclerView.setAdapter(adapternointernet);
+        }
+
     }
 
     /**
@@ -194,6 +209,13 @@ inflates the options menu
 
         // Load the Native Express ad.
         adView.loadAd(new AdRequest.Builder().build());
+    }
+
+    public boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null;
     }
 
     /*
