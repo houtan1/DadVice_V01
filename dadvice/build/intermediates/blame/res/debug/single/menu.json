@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/home/spencer/AndroidStudioProjects/GIT repos open cmd in here/dadvice/build/intermediates/res/merged/debug/menu/about_menu.xml",
+        "source": "/home/spencer/AndroidStudioProjects/GIT repos open cmd in here/dadvice/src/main/res/menu/about_menu.xml"
+    },
+    {
+        "merged": "/home/spencer/AndroidStudioProjects/GIT repos open cmd in here/app/build/intermediates/res/merged/debug/menu/about_menu.xml",
+        "source": "/home/spencer/AndroidStudioProjects/GIT repos open cmd in here/app/src/main/res/menu/about_menu.xml"
+    }
+]

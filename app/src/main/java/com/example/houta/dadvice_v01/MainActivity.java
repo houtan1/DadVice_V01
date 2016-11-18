@@ -43,7 +43,7 @@ public class MainActivity extends Activity {
     private static final int NATIVE_EXPRESS_AD_HEIGHT = 150;
 
     // The Native Express ad unit ID.
-    private static final String AD_UNIT_ID = "ca-app-pub-3940256099942544/1072772517"; //TODO remove and add our own ad account
+    private static final String AD_UNIT_ID = "ca-app-pub-9036948389286739/2010780002";
 
     // List of Native Express ads and MenuItems that populate the RecyclerView.
     private List<Object> mRecyclerViewItems;

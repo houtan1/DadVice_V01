@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/home/spencer/AndroidStudioProjects/GIT repos open cmd in here/app/build/intermediates/res/merged/debug/mipmap-hdpi/ic_launcher.png",
+        "source": "/home/spencer/AndroidStudioProjects/GIT repos open cmd in here/app/src/main/res/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/home/spencer/AndroidStudioProjects/GIT repos open cmd in here/dadvice/build/intermediates/res/merged/debug/mipmap-hdpi/ic_launcher.png",
+        "source": "/home/spencer/AndroidStudioProjects/GIT repos open cmd in here/dadvice/src/main/res/mipmap-hdpi/ic_launcher.png"
+    }
+]
