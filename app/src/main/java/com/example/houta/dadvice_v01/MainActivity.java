@@ -212,10 +212,13 @@ inflates the options menu
     }
 
     public boolean isNetworkAvailable() {
+        boolean return_value;
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null;
+        return_value = activeNetworkInfo != null;
+        if(!return_value)Log.e("TESTSTRING", "No internet connection");
+        return return_value;
     }
 
     /*
