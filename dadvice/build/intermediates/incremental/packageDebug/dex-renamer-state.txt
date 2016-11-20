@@ -1,0 +1,7 @@
+#Tue Nov 15 21:19:27 PST 2016
+base.0=/home/spencer/AndroidStudioProjects/GIT repos open cmd in here/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_68f008e1ef99daf9970e1b192a679e1369d414b7
+renamed.1=classes.dex
+renamed.0=classes2.dex
+file.1=/home/spencer/AndroidStudioProjects/GIT repos open cmd in here/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_d11e3923252ef37cf70d057b3b815f6c0e53c14d/classes.dex
+base.1=/home/spencer/AndroidStudioProjects/GIT repos open cmd in here/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_d11e3923252ef37cf70d057b3b815f6c0e53c14d
+file.0=/home/spencer/AndroidStudioProjects/GIT repos open cmd in here/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_68f008e1ef99daf9970e1b192a679e1369d414b7/classes.dex
