@@ -56,7 +56,7 @@ public class MainActivity extends Activity {
     //private CardAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
-    /** Called when the user clicks about menu button TODO link*/
+    /** Called when the user clicks about menu button */
     public void seeAboutMenu(){
         Intent intent = new Intent(this, AboutActivity.class);
         startActivity(intent);
@@ -68,13 +68,9 @@ public class MainActivity extends Activity {
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setDisplayShowCustomEnabled(true);
         actionBar.setCustomView(R.layout.actionbarlayout);
-
-        // You customization
+        // Your customization
         //final int actionBarColor = getResources().getColor(R.color.action_bar);
         //actionBar.setBackgroundDrawable(new ColorDrawable(actionBarColor));
-
-        final Button actionBarTitle = (Button) findViewById(R.id.action_bar_title);
-        actionBarTitle.setText("DADTEST");
 
         final Button actionBarSent = (Button) findViewById(R.id.action_bar_about);
         actionBarSent.setText("About");
@@ -84,8 +80,18 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //Create all action bar menus
+        //Create action bar with custom buttons
         setupActionBar();
+
+        //enable about button
+        Button clickButton = (Button) findViewById(R.id.action_bar_about);
+        clickButton.setOnClickListener( new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                seeAboutMenu();
+            }
+        });
 
         setContentView(R.layout.activity_main);
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerViewId);

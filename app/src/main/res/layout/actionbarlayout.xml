@@ -13,10 +13,6 @@
         android:id="@+id/AboutMenuText" />
 
     <Button
-        android:id="@+id/action_bar_title"
-        style="@style/ActionBarButtonDark" />
-
-    <Button
         android:id="@+id/action_bar_about"
         style="@style/ActionBarButtonDark" />
 
