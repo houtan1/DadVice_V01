@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:enabled="false"
     android:orientation="horizontal"
@@ -9,11 +9,20 @@
     <TextView
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:text="DADTEST2"
-        android:id="@+id/AboutMenuText" />
+        android:text="DadVice"
+        android:id="@+id/AboutMenuText"
+        android:textSize="24sp"
+        android:textColor="#383838" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        />
 
     <Button
         android:id="@+id/action_bar_about"
-        style="@style/ActionBarButtonDark" />
+        style="@style/ActionBarButtonDark"
+        android:layout_alignParentRight="true" />
 
 </LinearLayout>
