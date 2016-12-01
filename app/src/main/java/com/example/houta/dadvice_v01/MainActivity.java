@@ -1,9 +1,11 @@
 package com.example.houta.dadvice_v01;
 
+import android.app.ActionBar;
 import android.app.Activity;
 //import android.support.v7.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -17,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.util.Log;
@@ -80,9 +83,30 @@ inflates the options menu
         startActivity(intent);
     }
 
+    public void setupActionBar(){
+        final ActionBar actionBar = getActionBar();
+        actionBar.setDisplayShowHomeEnabled(false);
+        actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setDisplayShowCustomEnabled(true);
+        actionBar.setCustomView(R.layout.actionbarlayout);
+
+        // You customization
+        //final int actionBarColor = getResources().getColor(R.color.action_bar);
+        //actionBar.setBackgroundDrawable(new ColorDrawable(actionBarColor));
+
+        final Button actionBarTitle = (Button) findViewById(R.id.action_bar_title);
+        actionBarTitle.setText("DADTEST");
+
+        final Button actionBarSent = (Button) findViewById(R.id.action_bar_about);
+        actionBarSent.setText("About");
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        setupActionBar();
+
         setContentView(R.layout.activity_main);
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerViewId);
 
