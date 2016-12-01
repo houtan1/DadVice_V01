@@ -56,28 +56,7 @@ public class MainActivity extends Activity {
     //private CardAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
-    /*
-inflates the options menu
- */
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.about_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
-        switch (item.getItemId()) {
-            case R.id.about_menu:
-                seeAboutMenu();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    /** Called when the user clicks about menu button */
+    /** Called when the user clicks about menu button TODO link*/
     public void seeAboutMenu(){
         Intent intent = new Intent(this, AboutActivity.class);
         startActivity(intent);
@@ -105,6 +84,7 @@ inflates the options menu
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //Create all action bar menus
         setupActionBar();
 
         setContentView(R.layout.activity_main);
