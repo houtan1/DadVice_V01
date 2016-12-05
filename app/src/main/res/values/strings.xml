@@ -2,6 +2,8 @@
     <string name="app_name">DadVice</string>
     <string name="next_dadvice">Next DadVice</string>
     <string name="cardTextValue">cardTextValue</string>
-    <string name="AboutMenuContent">"Dadvice is an app created by BurritoCat. \n\nBurritoCat is a Canadian company founded in 2016 with the intention of making apps and software that stand out from the crowd. Please see our website for more information! \n\nwww.burritocat.xyz  \n\nDo you have DadVice for us? Email us at\n\nhiburritocat@gmail.com"</string>
+    <string name="about">About</string>
+    <string name="AboutMenuContent">"DadVice is an app created by BurritoCat. \n\nBurritoCat is a Canadian company founded in 2016 with the intention of making apps and software that stand out from the crowd. Please see our website for more information! \n\nwww.burritocat.xyz  \n\nDo you have DadVice for us? Email us at\n\nhiburritocat@gmail.com\n"</string>
+    <string name="back">Back</string>
     <string name="ad_unit_id"> ca-app-pub-3940256099942544/1072772517</string>
 </resources>

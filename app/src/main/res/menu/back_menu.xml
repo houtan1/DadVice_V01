@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <item
+        android:id="@+id/back_menu"
+        android:title="@string/back"
+        android:showAsAction="always"
+        android:icon="@drawable/ic_arrow_back_black_24dp">
+    </item>
+
+</menu>
