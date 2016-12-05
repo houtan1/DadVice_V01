@@ -1,33 +1,33 @@
 package com.example.houta.dadvice_v01;
 
-import android.app.ActionBar;
+//import android.app.ActionBar;
 import android.app.Activity;
 //import android.support.v7.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
+//import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutCompat;
+//import android.support.v7.app.AppCompatActivity;
+//import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
+//import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
+//import android.view.View;
+//import android.view.ViewGroup;
+//import android.widget.ArrayAdapter;
+//import android.widget.Button;
+//import android.widget.EditText;
+//import android.widget.ListView;
 import android.util.Log;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.lang.reflect.Array;
+//import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -53,8 +53,30 @@ public class MainActivity extends Activity {
 
     // ref: https://developer.android.com/training/material/lists-cards.html
     private RecyclerView mRecyclerView;
+
     //private CardAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+
+    /**
+     * Bringing back the menu inflater and the about menu
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.about_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.about_menu:
+                seeAboutMenu();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
     /** Called when the user clicks about menu button */
     public void seeAboutMenu(){
@@ -62,36 +84,9 @@ public class MainActivity extends Activity {
         startActivity(intent);
     }
 
-    public void setupActionBar(){
-        final ActionBar actionBar = getActionBar();
-        actionBar.setDisplayShowHomeEnabled(false);
-        actionBar.setDisplayShowTitleEnabled(false);
-        actionBar.setDisplayShowCustomEnabled(true);
-        actionBar.setCustomView(R.layout.actionbarlayout);
-        // Your customization
-        //final int actionBarColor = getResources().getColor(R.color.action_bar);
-        //actionBar.setBackgroundDrawable(new ColorDrawable(actionBarColor));
-
-        final Button actionBarSent = (Button) findViewById(R.id.action_bar_about);
-        actionBarSent.setText("About");
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        //Create action bar with custom buttons
-        setupActionBar();
-
-        //enable about button
-        Button clickButton = (Button) findViewById(R.id.action_bar_about);
-        clickButton.setOnClickListener( new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                seeAboutMenu();
-            }
-        });
 
         setContentView(R.layout.activity_main);
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerViewId);
