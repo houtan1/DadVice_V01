@@ -6,10 +6,15 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.google.firebase.analytics.FirebaseAnalytics;
 //import android.view.ViewGroup;
 //import android.widget.TextView;
 
 public class AboutActivity extends Activity {
+
+    // Initializing Firebase Analytics for the AboutActivity
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     /**
      * Inflates the back menu
@@ -22,6 +27,12 @@ public class AboutActivity extends Activity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        // Log Analytics Event
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.ACHIEVEMENT_ID, "Opened AboutActivity");
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.APP_OPEN, bundle);
+
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.back_menu:
