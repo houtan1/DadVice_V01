@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "127529431531-c0mg1tt430duh81vtglb9qadptobsoo4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.houta.dadvice_v01",
+            "certificate_hash": "3E613D3D99DD68E1DC55AB46FB0D3A114C2F384C"
+          }
+        },
+        {
           "client_id": "127529431531-66n5sklnfo8s3b97cndo7429tupi0f0p.apps.googleusercontent.com",
           "client_type": 3
         }

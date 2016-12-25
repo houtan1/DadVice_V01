@@ -36,6 +36,7 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.NativeExpressAdView;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 
 public class MainActivity extends Activity {
@@ -50,6 +51,9 @@ public class MainActivity extends Activity {
 
     // List of Native Express ads and MenuItems that populate the RecyclerView.
     private List<Object> mRecyclerViewItems;
+
+    // Initializing Firebase Analytics for the MainActivity
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     // ref: https://developer.android.com/training/material/lists-cards.html
     private RecyclerView mRecyclerView;
@@ -87,6 +91,15 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Obtain the FirebaseAnalytics instance.
+        // Required adding permissions for ACCESS_NETWORK_STATE and WAKE_LOCK in AndroidManifest.xml
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
+        // Log Analytics Event
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.ACHIEVEMENT_ID, "Opened MainActivity");
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.APP_OPEN, bundle);
 
         setContentView(R.layout.activity_main);
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerViewId);
