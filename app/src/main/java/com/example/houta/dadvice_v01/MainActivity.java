@@ -32,6 +32,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+
+import com.facebook.FacebookSdk;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
@@ -98,6 +100,9 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //initialize facebook sdk
+        FacebookSdk.sdkInitialize(getApplicationContext());
 
         // Obtain the Firebase Analytics instance, onCreate
         // Required adding permissions for ACCESS_NETWORK_STATE and WAKE_LOCK in AndroidManifest.xml
