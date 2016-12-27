@@ -8,6 +8,7 @@ import android.content.Intent;
 //import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 //import android.support.v7.app.AppCompatActivity;
 //import android.support.v7.widget.LinearLayoutCompat;
@@ -34,6 +35,8 @@ import java.util.List;
 import java.util.Random;
 
 import com.facebook.FacebookSdk;
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.widget.ShareButton;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
@@ -109,6 +112,14 @@ public class MainActivity extends Activity {
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         setContentView(R.layout.activity_main);
+
+        ShareButton fbShareButton = (ShareButton) findViewById(R.id.share_btn);
+        ShareLinkContent content = new ShareLinkContent.Builder()
+                .setContentUrl(Uri.parse("https://developers.facebook.com"))
+                .build();
+        fbShareButton.setShareContent(content);
+
+
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerViewId);
 
         // use this setting to improve performance if you know that changes
