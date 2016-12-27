@@ -84,6 +84,13 @@ public class MainActivity extends Activity {
 
     /** Called when the user clicks about menu button */
     public void seeAboutMenu(){
+        // log the about menu call event
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "About Button");
+        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "Button");
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+
+        // Use intents to start AboutActivity
         Intent intent = new Intent(this, AboutActivity.class);
         startActivity(intent);
     }
@@ -92,14 +99,9 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Obtain the FirebaseAnalytics instance.
+        // Obtain the Firebase Analytics instance, onCreate
         // Required adding permissions for ACCESS_NETWORK_STATE and WAKE_LOCK in AndroidManifest.xml
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
-
-        // Log Analytics Event
-        Bundle bundle = new Bundle();
-        bundle.putString(FirebaseAnalytics.Param.ACHIEVEMENT_ID, "Opened MainActivity");
-        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.APP_OPEN, bundle);
 
         setContentView(R.layout.activity_main);
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerViewId);
