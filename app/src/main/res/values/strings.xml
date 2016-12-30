@@ -8,4 +8,6 @@
     <string name="ad_unit_id"> ca-app-pub-3940256099942544/1072772517</string>
     <string name="facebook_app_id">292339441163718</string>
     <string name="share">Share</string>
+    <string name="facebook_content_description">"Good advice. Bad advice. DadVice has it all!"</string>
+    <string name="facebook_content_url">"http://developers.facebook.com"</string>
 </resources>

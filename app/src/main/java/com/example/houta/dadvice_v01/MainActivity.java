@@ -117,7 +117,9 @@ public class MainActivity extends Activity {
 
         ShareButton fbShareButton = (ShareButton) findViewById(R.id.share_btn);
         ShareLinkContent content = new ShareLinkContent.Builder()
-                .setContentUrl(Uri.parse("https://developers.facebook.com"))
+                .setContentUrl(Uri.parse(getString(R.string.facebook_content_url)))
+                .setContentTitle("TEST DADVICE STRING")
+                .setContentDescription(getString(R.string.facebook_content_description))
                 .build();
         fbShareButton.setShareContent(content);
 
