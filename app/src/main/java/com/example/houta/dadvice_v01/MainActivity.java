@@ -101,6 +101,23 @@ public class MainActivity extends Activity {
         startActivity(intent);
     }
 
+    public void buildFacebookShareButton(){
+        ShareButton fbShareButton = (ShareButton) findViewById(R.id.share_btn);
+        ShareLinkContent content = new ShareLinkContent.Builder()
+                .setContentUrl(Uri.parse(getString(R.string.facebook_content_url)))
+                .setContentTitle("TEST DADVICE STRING")
+                .setContentDescription(getString(R.string.facebook_content_description))
+                .build();
+        fbShareButton.setShareContent(content);
+    }
+
+    public void addFacebookShareButtons(){
+        int i;
+        for (i = 1; i <= mRecyclerViewItems.size(); i=i+1){
+            buildFacebookShareButton();
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,15 +131,6 @@ public class MainActivity extends Activity {
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         setContentView(R.layout.activity_main);
-
-        ShareButton fbShareButton = (ShareButton) findViewById(R.id.share_btn);
-        ShareLinkContent content = new ShareLinkContent.Builder()
-                .setContentUrl(Uri.parse(getString(R.string.facebook_content_url)))
-                .setContentTitle("TEST DADVICE STRING")
-                .setContentDescription(getString(R.string.facebook_content_description))
-                .build();
-        //fbShareButton.setShareContent(content);
-
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerViewId);
 
@@ -142,6 +150,9 @@ public class MainActivity extends Activity {
 
         //randomize dadVice
         randomize_List(mRecyclerViewItems);
+
+        //addFacebookShareButtons(); we will use this for fully functional share
+        buildFacebookShareButton();
 
         //set up and load ads
         if(isNetworkAvailable())
@@ -272,7 +283,7 @@ public class MainActivity extends Activity {
             reader = new BufferedReader(new InputStreamReader(file));
             String line = reader.readLine();
             outputArray.add(line);
-            while (line != null){
+            while (line != null) {
                 line = reader.readLine();
                 if (line != null) {
                     outputArray.add(line);
