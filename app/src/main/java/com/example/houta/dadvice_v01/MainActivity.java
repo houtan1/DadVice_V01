@@ -121,7 +121,7 @@ public class MainActivity extends Activity {
                 .setContentTitle("TEST DADVICE STRING")
                 .setContentDescription(getString(R.string.facebook_content_description))
                 .build();
-        fbShareButton.setShareContent(content);
+        //fbShareButton.setShareContent(content);
 
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerViewId);
