@@ -8,6 +8,7 @@ import android.content.Intent;
 //import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 //import android.support.v7.app.AppCompatActivity;
 //import android.support.v7.widget.LinearLayoutCompat;
@@ -32,6 +33,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.widget.ShareButton;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
@@ -95,15 +101,37 @@ public class MainActivity extends Activity {
         startActivity(intent);
     }
 
+    public void buildFacebookShareButton(){
+        ShareButton fbShareButton = (ShareButton) findViewById(R.id.share_btn);
+        ShareLinkContent content = new ShareLinkContent.Builder()
+                .setContentUrl(Uri.parse(getString(R.string.facebook_content_url)))
+                .setContentTitle("TEST DADVICE STRING")
+                .setContentDescription(getString(R.string.facebook_content_description))
+                .build();
+        fbShareButton.setShareContent(content);
+    }
+
+    public void addFacebookShareButtons(){
+        int i;
+        for (i = 1; i <= mRecyclerViewItems.size(); i=i+1){
+            buildFacebookShareButton();
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //initialize facebook sdk
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        AppEventsLogger.activateApp(this);
 
         // Obtain the Firebase Analytics instance, onCreate
         // Required adding permissions for ACCESS_NETWORK_STATE and WAKE_LOCK in AndroidManifest.xml
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         setContentView(R.layout.activity_main);
+
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerViewId);
 
         // use this setting to improve performance if you know that changes
@@ -122,6 +150,9 @@ public class MainActivity extends Activity {
 
         //randomize dadVice
         randomize_List(mRecyclerViewItems);
+
+        //addFacebookShareButtons(); we will use this for fully functional share
+        buildFacebookShareButton();
 
         //set up and load ads
         if(isNetworkAvailable())
@@ -252,7 +283,7 @@ public class MainActivity extends Activity {
             reader = new BufferedReader(new InputStreamReader(file));
             String line = reader.readLine();
             outputArray.add(line);
-            while (line != null){
+            while (line != null) {
                 line = reader.readLine();
                 if (line != null) {
                     outputArray.add(line);
