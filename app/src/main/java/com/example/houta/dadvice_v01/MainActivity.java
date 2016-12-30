@@ -55,6 +55,9 @@ public class MainActivity extends Activity {
     // The Native Express ad unit ID.
     private static final String AD_UNIT_ID = "ca-app-pub-9036948389286739/2010780002";
 
+    //Number of cards to be loaded in recyclerview at a time
+    private static final int ITEMS_PER_LOAD = ITEMS_PER_AD*3;
+
     // List of Native Express ads and MenuItems that populate the RecyclerView.
     private List<Object> mRecyclerViewItems;
 
@@ -146,10 +149,7 @@ public class MainActivity extends Activity {
         mRecyclerViewItems = new ArrayList<>();
 
         //given file name and arrayList, reads from file and populates arrayList
-        readFromFile("dadViceDB.txt", mRecyclerViewItems);
-
-        //randomize dadVice
-        randomize_List(mRecyclerViewItems);
+        readRandomFromFile("dadViceDB.txt", mRecyclerViewItems, ITEMS_PER_LOAD);
 
         //addFacebookShareButtons(); we will use this for fully functional share
         buildFacebookShareButton();
@@ -276,21 +276,28 @@ public class MainActivity extends Activity {
     This method reads strings from a file and writes them to an ArrayList
     ref http://stackoverflow.com/questions/24291721/reading-a-text-file-line-by-line-in-android
     */
-    private List readFromFile(String fileName, List outputArray) {
+    private List readRandomFromFile(String fileName, List outputArray,int num_items) {
         BufferedReader reader;
+        List intermedArray = new ArrayList<>();
         try {
             final InputStream file = getAssets().open(fileName);
             reader = new BufferedReader(new InputStreamReader(file));
             String line = reader.readLine();
-            outputArray.add(line);
+            //put intermediate file read together
+            intermedArray.add(line);
             while (line != null) {
                 line = reader.readLine();
                 if (line != null) {
-                    outputArray.add(line);
+                    intermedArray.add(line);
                 }
             }
         } catch (IOException ioe) {
             ioe.printStackTrace();
+        }
+        //now randomize the read files and only return num_items of them for build
+        randomize_List(intermedArray);
+        for (int j = 0; j < num_items; j = j + 1){
+            outputArray.add(intermedArray.get(j));
         }
         return outputArray;
     }
