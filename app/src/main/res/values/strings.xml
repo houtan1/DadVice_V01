@@ -3,11 +3,11 @@
     <string name="next_dadvice">Next DadVice</string>
     <string name="cardTextValue">cardTextValue</string>
     <string name="about">About</string>
-    <string name="AboutMenuContent">"<b>Disclaimer:</b> \"DadVices\" are meant for entertainment purposes only and should not be taken seriously. We are not liable for any loss or damage resulting from this app or its content.\n\nDadVice is an app created by BurritoCat. \n\nBurritoCat is a Canadian company founded in 2016, specializing in making awesome apps and software. Check us out online: www.burritocat.xyz  \n\nDo you have DadVice for us? Email us at: hiburritocat@gmail.com\n"</string>
+    <string name="AboutMenuContent">"<b>Disclaimer:</b> <i>\"DadVices\" are meant for entertainment purposes only and should not be taken seriously. We are not liable for any loss or damage resulting from this app or its content.</i>\n\nDadVice is an app created by BurritoCat. \n\nBurritoCat is a Canadian company founded in 2016, specializing in making awesome apps and software. Check us out online: www.burritocat.xyz  \n\nDo you have DadVice for us? Email us at: hiburritocat@gmail.com\n"</string>
     <string name="back">Back</string>
     <string name="ad_unit_id"> ca-app-pub-3940256099942544/1072772517</string>
     <string name="facebook_app_id">292339441163718</string>
     <string name="share">Share</string>
     <string name="facebook_content_description">"Good advice. Bad advice. DadVice has it all!"</string>
-    <string name="facebook_content_url">"http://developers.facebook.com"</string>
+    <string name="facebook_content_url">"http://http://burritocat.xyz/#work"</string>
 </resources>
