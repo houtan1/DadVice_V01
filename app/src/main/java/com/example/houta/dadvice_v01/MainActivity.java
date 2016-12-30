@@ -35,6 +35,7 @@ import java.util.List;
 import java.util.Random;
 
 import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareButton;
 import com.google.android.gms.ads.AdListener;
@@ -106,6 +107,7 @@ public class MainActivity extends Activity {
 
         //initialize facebook sdk
         FacebookSdk.sdkInitialize(getApplicationContext());
+        AppEventsLogger.activateApp(this);
 
         // Obtain the Firebase Analytics instance, onCreate
         // Required adding permissions for ACCESS_NETWORK_STATE and WAKE_LOCK in AndroidManifest.xml
