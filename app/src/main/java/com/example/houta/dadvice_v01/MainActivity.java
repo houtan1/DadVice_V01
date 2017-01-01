@@ -44,7 +44,6 @@ import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.NativeExpressAdView;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
-
 public class MainActivity extends Activity {
     // A Native Express ad is placed in every nth position in the RecyclerView.
     public static final int ITEMS_PER_AD = 10;
@@ -57,6 +56,9 @@ public class MainActivity extends Activity {
 
     //Number of cards to be loaded in recyclerview at a time
     private static final int ITEMS_PER_LOAD = ITEMS_PER_AD*3;
+
+    // Store a member variable for the listener
+    private EndlessScrollListener scrollListener;
 
     // List of Native Express ads and MenuItems that populate the RecyclerView.
     private List<Object> mRecyclerViewItems;
@@ -160,6 +162,21 @@ public class MainActivity extends Activity {
             addNativeExpressAds();
             setUpAndLoadNativeExpressAds();
         }
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(linearLayoutManager);
+        // Retain an instance so that you can call `resetState()` for fresh searches
+        scrollListener = new EndlessScrollListener(linearLayoutManager) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                // Triggered only when new data needs to be appended to the list
+                // Add whatever code is needed to append new items to the bottom of the list
+                loadNextDataFromApi(page);
+            }
+        };
+        // Adds the scroll listener to RecyclerView
+        mRecyclerView.addOnScrollListener(scrollListener);
+
         // Specify adapter that supports cardview and adview
         //This is inefficient but more readable code and since computation is cheap it's better to strive for readable
         if(isNetworkAvailable())
@@ -173,6 +190,18 @@ public class MainActivity extends Activity {
             mRecyclerView.setAdapter(adapternointernet);
         }
 
+    }
+
+
+    // Append the next page of data into the adapter
+    // This method probably sends out a network request and appends new data items to your adapter.
+    public void loadNextDataFromApi(int offset) {
+        // Send an API request to retrieve appropriate paginated data
+        //  --> Send the request including an offset value (i.e `page`) as a query parameter.
+        //  --> Deserialize and construct new model objects from the API response
+        //  --> Append the new data objects to the existing set of items inside the array of items
+        //  --> Notify the adapter of the new items made with `notifyDataSetChanged()`
+        readRandomFromFile("dadViceDB.txt", mRecyclerViewItems, ITEMS_PER_LOAD);
     }
 
     /**
