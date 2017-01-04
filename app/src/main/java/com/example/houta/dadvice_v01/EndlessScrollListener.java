@@ -1,5 +1,6 @@
 package com.example.houta.dadvice_v01;
 
+import android.support.v7.widget.RecyclerView;
 import android.widget.AbsListView;
 
 public abstract class EndlessScrollListener implements AbsListView.OnScrollListener {

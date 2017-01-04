@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 //import android.support.v7.app.AppCompatActivity;
 //import android.support.v7.widget.LinearLayoutCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 //import android.view.LayoutInflater;
@@ -43,6 +44,8 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.NativeExpressAdView;
 import com.google.firebase.analytics.FirebaseAnalytics;
+
+import static android.content.ContentValues.TAG;
 
 public class MainActivity extends Activity {
     // A Native Express ad is placed in every nth position in the RecyclerView.
@@ -162,20 +165,63 @@ public class MainActivity extends Activity {
             addNativeExpressAds();
             setUpAndLoadNativeExpressAds();
         }
-
+/*
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(linearLayoutManager);
-        // Retain an instance so that you can call `resetState()` for fresh searches
-        scrollListener = new EndlessScrollListener(linearLayoutManager) {
+        //Retain an instance so that you can call `resetState()` for fresh searches
+        //scrollListener = new EndlessScrollListener(linearLayoutManager) {
+        scrollListener = new EndlessScrollListener(5) {
             @Override
-            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+            public boolean onLoadMore(int page, int totalItemsCount) {
                 // Triggered only when new data needs to be appended to the list
                 // Add whatever code is needed to append new items to the bottom of the list
                 loadNextDataFromApi(page);
+                return true;
             }
         };
         // Adds the scroll listener to RecyclerView
         mRecyclerView.addOnScrollListener(scrollListener);
+*/
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(linearLayoutManager);
+
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            int ydy = 0;
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                int offset = dy - ydy;
+                ydy = dy;
+                Log.e(TAG, "onScrolled: FOUND IT0");
+                boolean shouldRefresh = (linearLayoutManager.findFirstCompletelyVisibleItemPosition() == 0)
+                        && (recyclerView.getScrollState() == RecyclerView.SCROLL_STATE_DRAGGING) && offset > 10;
+                if (shouldRefresh) {
+                    //swipeRefreshLayout.setRefreshing(true);
+                    //Refresh to load data here.
+                    Log.e(TAG, "onScrolled: FOUND IT");
+                    return;
+                }
+                boolean shouldPullUpRefresh = linearLayoutManager.findLastCompletelyVisibleItemPosition() == linearLayoutManager.getChildCount() - 1
+                        && recyclerView.getScrollState() == RecyclerView.SCROLL_STATE_DRAGGING && offset < -10;
+                if (shouldPullUpRefresh) {
+                    //swipeRefreshLayout.setRefreshing(true);
+                    //refresh to load data here.
+                    Log.e(TAG, "onScrolled: FOUND IT2");
+                    return;
+                }
+                //SwipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
         // Specify adapter that supports cardview and adview
         //This is inefficient but more readable code and since computation is cheap it's better to strive for readable
