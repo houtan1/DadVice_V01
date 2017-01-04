@@ -184,7 +184,7 @@ public class MainActivity extends Activity {
 */
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        final SwipeRefreshLayout swipeRefreshLayout = new SwipeRefreshLayout(this);
+        final SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.recyclerViewSwipeLayout);
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(linearLayoutManager);
 
