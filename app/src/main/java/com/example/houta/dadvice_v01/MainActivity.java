@@ -113,7 +113,7 @@ public class MainActivity extends Activity {
         ShareButton fbShareButton = (ShareButton) findViewById(R.id.share_btn);
         ShareLinkContent content = new ShareLinkContent.Builder()
                 .setContentUrl(Uri.parse(getString(R.string.facebook_content_url)))
-                .setContentTitle("TEST DADVICE STRING")
+                .setContentTitle("DadVice by BurritoCat")
                 .setContentDescription(getString(R.string.facebook_content_description))
                 .build();
         fbShareButton.setShareContent(content);
@@ -184,6 +184,7 @@ public class MainActivity extends Activity {
 */
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        final SwipeRefreshLayout swipeRefreshLayout = new SwipeRefreshLayout(this);
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(linearLayoutManager);
 
@@ -200,11 +201,11 @@ public class MainActivity extends Activity {
                 super.onScrolled(recyclerView, dx, dy);
                 int offset = dy - ydy;
                 ydy = dy;
-                Log.e(TAG, "onScrolled: FOUND IT0");
+                //Log.e(TAG, "onScrolled: FOUND IT0");
                 boolean shouldRefresh = (linearLayoutManager.findFirstCompletelyVisibleItemPosition() == 0)
                         && (recyclerView.getScrollState() == RecyclerView.SCROLL_STATE_DRAGGING) && offset > 10;
                 if (shouldRefresh) {
-                    //swipeRefreshLayout.setRefreshing(true);
+                    swipeRefreshLayout.setRefreshing(true);
                     //Refresh to load data here.
                     Log.e(TAG, "onScrolled: FOUND IT");
                     return;
@@ -212,12 +213,12 @@ public class MainActivity extends Activity {
                 boolean shouldPullUpRefresh = linearLayoutManager.findLastCompletelyVisibleItemPosition() == linearLayoutManager.getChildCount() - 1
                         && recyclerView.getScrollState() == RecyclerView.SCROLL_STATE_DRAGGING && offset < -10;
                 if (shouldPullUpRefresh) {
-                    //swipeRefreshLayout.setRefreshing(true);
+                    swipeRefreshLayout.setRefreshing(true);
                     //refresh to load data here.
                     Log.e(TAG, "onScrolled: FOUND IT2");
                     return;
                 }
-                //SwipeRefreshLayout.setRefreshing(false);
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
 
