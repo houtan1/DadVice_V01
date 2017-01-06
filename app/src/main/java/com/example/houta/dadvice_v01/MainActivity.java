@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 //import android.support.v7.app.AppCompatActivity;
 //import android.support.v7.widget.LinearLayoutCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 //import android.view.LayoutInflater;
@@ -44,6 +45,7 @@ import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.NativeExpressAdView;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
+import static android.content.ContentValues.TAG;
 
 public class MainActivity extends Activity {
     // A Native Express ad is placed in every nth position in the RecyclerView.
@@ -54,6 +56,15 @@ public class MainActivity extends Activity {
 
     // The Native Express ad unit ID.
     private static final String AD_UNIT_ID = "ca-app-pub-9036948389286739/2010780002";
+
+    //Number of cards to be loaded in recyclerview at a time
+    private static final int ITEMS_PER_LOAD = ITEMS_PER_AD*3;
+
+    //store length of total scrolls
+    public static int pers_card_offset = 0;
+
+    //final scroll index before next load
+    public static final int scroll_limit = 300*ITEMS_PER_LOAD;  //467 is mathematical answer, error margin added
 
     // List of Native Express ads and MenuItems that populate the RecyclerView.
     private List<Object> mRecyclerViewItems;
@@ -105,7 +116,7 @@ public class MainActivity extends Activity {
         ShareButton fbShareButton = (ShareButton) findViewById(R.id.share_btn);
         ShareLinkContent content = new ShareLinkContent.Builder()
                 .setContentUrl(Uri.parse(getString(R.string.facebook_content_url)))
-                .setContentTitle("TEST DADVICE STRING")
+                .setContentTitle("DadVice by BurritoCat")
                 .setContentDescription(getString(R.string.facebook_content_description))
                 .build();
         fbShareButton.setShareContent(content);
@@ -146,10 +157,7 @@ public class MainActivity extends Activity {
         mRecyclerViewItems = new ArrayList<>();
 
         //given file name and arrayList, reads from file and populates arrayList
-        readFromFile("dadViceDB.txt", mRecyclerViewItems);
-
-        //randomize dadVice
-        randomize_List(mRecyclerViewItems);
+        readRandomFromFile("dadViceDB.txt", mRecyclerViewItems, ITEMS_PER_LOAD);
 
         //addFacebookShareButtons(); we will use this for fully functional share
         buildFacebookShareButton();
@@ -160,6 +168,47 @@ public class MainActivity extends Activity {
             addNativeExpressAds();
             setUpAndLoadNativeExpressAds();
         }
+
+        final SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.recyclerViewSwipeLayout);
+
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            int ydy = 0;
+            int card_offset = 0;
+            int temp_offset = 0;
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                //scrolling down produces positive dy offset
+
+                temp_offset = dy - ydy;
+                ydy = dy;
+                card_offset = card_offset + temp_offset;
+                pers_card_offset = pers_card_offset + card_offset;
+                //Log.e(TAG, "onScrolled: FOUND IT" + pers_card_offset);
+                boolean shouldRefresh = (recyclerView.getScrollState() == RecyclerView.SCROLL_STATE_DRAGGING)
+                        && (pers_card_offset > scroll_limit);
+                if (shouldRefresh) {
+                    swipeRefreshLayout.setRefreshing(true);//start refresh animation
+                    //Refresh to load data here.
+                    loadDisplayNewDadvices();
+
+                    Log.e(TAG, "onScrolled: NEW DATA TO LOAD");
+                    ydy = dy;
+                    card_offset = 0;
+                    pers_card_offset = 0;
+                }
+                swipeRefreshLayout.setRefreshing(false);//end refresh animation
+            }
+        });
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
         // Specify adapter that supports cardview and adview
         //This is inefficient but more readable code and since computation is cheap it's better to strive for readable
         if(isNetworkAvailable())
@@ -174,6 +223,8 @@ public class MainActivity extends Activity {
         }
 
     }
+
+
 
     /**
      * Adds Native Express ads to the items list.
@@ -272,25 +323,60 @@ public class MainActivity extends Activity {
         return return_value;
     }
 
+    //load new cards after scrolling down to threshold
+    private void loadDisplayNewDadvices(){
+        readRandomFromFile("dadViceDB.txt", mRecyclerViewItems, ITEMS_PER_LOAD);
+
+        //addFacebookShareButtons(); we will use this for fully functional share
+        buildFacebookShareButton();
+
+        //set up and load ads
+        if(isNetworkAvailable())
+        {
+            addNativeExpressAds();
+            setUpAndLoadNativeExpressAds();
+        }
+
+        // Specify adapter that supports cardview and adview
+        //This is inefficient but more readable code and since computation is cheap it's better to strive for readable
+        if(isNetworkAvailable())
+        {
+            RecyclerView.Adapter adapter = new RecyclerViewAdapter(this, mRecyclerViewItems);
+            mRecyclerView.setAdapter(adapter);
+        }
+        else
+        {
+            RecyclerView.Adapter adapternointernet = new RecyclerViewAdapterNoInternet(this, mRecyclerViewItems);
+            mRecyclerView.setAdapter(adapternointernet);
+        }
+    }
+
     /*
     This method reads strings from a file and writes them to an ArrayList
     ref http://stackoverflow.com/questions/24291721/reading-a-text-file-line-by-line-in-android
     */
-    private List readFromFile(String fileName, List outputArray) {
+    private List readRandomFromFile(String fileName, List outputArray,int num_items) {
         BufferedReader reader;
+        List intermedArray = new ArrayList<>();
         try {
             final InputStream file = getAssets().open(fileName);
             reader = new BufferedReader(new InputStreamReader(file));
             String line = reader.readLine();
-            outputArray.add(line);
+            //put intermediate file read together
+            intermedArray.add(line);
             while (line != null) {
                 line = reader.readLine();
                 if (line != null) {
-                    outputArray.add(line);
+                    intermedArray.add(line);
                 }
             }
         } catch (IOException ioe) {
             ioe.printStackTrace();
+        }
+        //now randomize the read files and only return num_items of them for build
+        randomize_List(intermedArray);
+        for (int j = 0; j < num_items; j = j + 1){
+            outputArray.add(intermedArray.get(j));
         }
         return outputArray;
     }
