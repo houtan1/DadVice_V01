@@ -111,7 +111,7 @@ public class MainActivity extends Activity {
         Intent intent = new Intent(this, AboutActivity.class);
         startActivity(intent);
     }
-
+/*
     public void buildFacebookShareButton(){
         ShareButton fbShareButton = (ShareButton) findViewById(R.id.share_btn);
         ShareLinkContent content = new ShareLinkContent.Builder()
@@ -128,14 +128,14 @@ public class MainActivity extends Activity {
             buildFacebookShareButton();
         }
     }
-
+*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         //initialize facebook sdk
-        FacebookSdk.sdkInitialize(getApplicationContext());
-        AppEventsLogger.activateApp(this);
+       //// FacebookSdk.sdkInitialize(getApplicationContext());
+       //// AppEventsLogger.activateApp(this);
 
         // Obtain the Firebase Analytics instance, onCreate
         // Required adding permissions for ACCESS_NETWORK_STATE and WAKE_LOCK in AndroidManifest.xml
@@ -160,7 +160,7 @@ public class MainActivity extends Activity {
         readRandomFromFile("dadViceDB.txt", mRecyclerViewItems, ITEMS_PER_LOAD);
 
         //addFacebookShareButtons(); we will use this for fully functional share
-        buildFacebookShareButton();
+        ////buildFacebookShareButton();
 
         //set up and load ads
         if(isNetworkAvailable())
@@ -328,7 +328,7 @@ public class MainActivity extends Activity {
         readRandomFromFile("dadViceDB.txt", mRecyclerViewItems, ITEMS_PER_LOAD);
 
         //addFacebookShareButtons(); we will use this for fully functional share
-        buildFacebookShareButton();
+        ////buildFacebookShareButton();
 
         //set up and load ads
         if(isNetworkAvailable())
