@@ -63,6 +63,12 @@ public class MainActivity extends Activity {
     // Store a member variable for the listener
     private EndlessScrollListener scrollListener;
 
+    //store length of total scrolls
+    public static int pers_card_offset = 0;
+
+    //final scroll index before next load
+    public static final int scroll_limit = 466*ITEMS_PER_LOAD;
+
     // List of Native Express ads and MenuItems that populate the RecyclerView.
     private List<Object> mRecyclerViewItems;
 
@@ -185,11 +191,13 @@ public class MainActivity extends Activity {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
         final SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.recyclerViewSwipeLayout);
-        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(linearLayoutManager);
+//        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+//        mRecyclerView.setLayoutManager(linearLayoutManager);
 
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             int ydy = 0;
+            int card_offset = 0;
+            int temp_offset = 0;
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
@@ -199,26 +207,26 @@ public class MainActivity extends Activity {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                int offset = dy - ydy;
+                //scrolling down produces positive dy offset
+
+                temp_offset = dy - ydy;
                 ydy = dy;
-                //Log.e(TAG, "onScrolled: FOUND IT0");
-                boolean shouldRefresh = (linearLayoutManager.findFirstCompletelyVisibleItemPosition() == 0)
-                        && (recyclerView.getScrollState() == RecyclerView.SCROLL_STATE_DRAGGING) && offset > 10;
+                card_offset = card_offset + temp_offset;
+                pers_card_offset = pers_card_offset + card_offset;
+                //Log.e(TAG, "onScrolled: FOUND IT" + pers_card_offset);
+                boolean shouldRefresh = (recyclerView.getScrollState() == RecyclerView.SCROLL_STATE_DRAGGING)
+                        && (pers_card_offset > scroll_limit);
                 if (shouldRefresh) {
-                    swipeRefreshLayout.setRefreshing(true);
+                    swipeRefreshLayout.setRefreshing(true);//start refresh animation
                     //Refresh to load data here.
-                    Log.e(TAG, "onScrolled: FOUND IT");
-                    return;
+                    //readRandomFromFile("dadViceDB.txt", mRecyclerViewItems, ITEMS_PER_LOAD);
+                    Log.e(TAG, "onScrolled: NEW_DATA" + card_offset);
+                    ydy = dy;
+                    card_offset = 0;
+                    pers_card_offset = 0;
+                    ///return;
                 }
-                boolean shouldPullUpRefresh = linearLayoutManager.findLastCompletelyVisibleItemPosition() == linearLayoutManager.getChildCount() - 1
-                        && recyclerView.getScrollState() == RecyclerView.SCROLL_STATE_DRAGGING && offset < -10;
-                if (shouldPullUpRefresh) {
-                    swipeRefreshLayout.setRefreshing(true);
-                    //refresh to load data here.
-                    Log.e(TAG, "onScrolled: FOUND IT2");
-                    return;
-                }
-                swipeRefreshLayout.setRefreshing(false);
+                swipeRefreshLayout.setRefreshing(false);//end refresh animation
             }
         });
 
