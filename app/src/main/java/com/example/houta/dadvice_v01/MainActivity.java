@@ -60,14 +60,11 @@ public class MainActivity extends Activity {
     //Number of cards to be loaded in recyclerview at a time
     private static final int ITEMS_PER_LOAD = ITEMS_PER_AD*3;
 
-    // Store a member variable for the listener
-    private EndlessScrollListener scrollListener;
-
     //store length of total scrolls
     public static int pers_card_offset = 0;
 
     //final scroll index before next load
-    public static final int scroll_limit = 466*ITEMS_PER_LOAD;
+    public static final int scroll_limit = 300*ITEMS_PER_LOAD;  //467 is mathematical answer, error margin added
 
     // List of Native Express ads and MenuItems that populate the RecyclerView.
     private List<Object> mRecyclerViewItems;
@@ -339,6 +336,7 @@ public class MainActivity extends Activity {
             addNativeExpressAds();
             setUpAndLoadNativeExpressAds();
         }
+
         // Specify adapter that supports cardview and adview
         //This is inefficient but more readable code and since computation is cheap it's better to strive for readable
         if(isNetworkAvailable())
