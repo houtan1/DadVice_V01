@@ -19,4 +19,14 @@
         android:minLines="2"
         android:textSize="20dp"
         android:scrollHorizontally="false" />
+    <TextView
+        android:autoLink="web|email"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:text="@string/AboutMenuRobotLegal"
+        android:id="@+id/AboutMenuLegal"
+        android:gravity="bottom|center"
+        android:minLines="2"
+        android:textSize="10dp"
+        android:scrollHorizontally="false" />
 </RelativeLayout>
