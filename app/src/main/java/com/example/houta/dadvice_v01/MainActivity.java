@@ -171,28 +171,8 @@ public class MainActivity extends Activity {
             addNativeExpressAds();
             setUpAndLoadNativeExpressAds();
         }
-/*
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(linearLayoutManager);
-        //Retain an instance so that you can call `resetState()` for fresh searches
-        //scrollListener = new EndlessScrollListener(linearLayoutManager) {
-        scrollListener = new EndlessScrollListener(5) {
-            @Override
-            public boolean onLoadMore(int page, int totalItemsCount) {
-                // Triggered only when new data needs to be appended to the list
-                // Add whatever code is needed to append new items to the bottom of the list
-                loadNextDataFromApi(page);
-                return true;
-            }
-        };
-        // Adds the scroll listener to RecyclerView
-        mRecyclerView.addOnScrollListener(scrollListener);
-*/
-////////////////////////////////////////////////////////////////////////////////////////////////////
 
         final SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.recyclerViewSwipeLayout);
-//        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-//        mRecyclerView.setLayoutManager(linearLayoutManager);
 
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             int ydy = 0;
@@ -219,12 +199,12 @@ public class MainActivity extends Activity {
                 if (shouldRefresh) {
                     swipeRefreshLayout.setRefreshing(true);//start refresh animation
                     //Refresh to load data here.
-                    //readRandomFromFile("dadViceDB.txt", mRecyclerViewItems, ITEMS_PER_LOAD);
-                    Log.e(TAG, "onScrolled: NEW_DATA" + card_offset);
+                    loadDisplayNewDadvices();
+
+                    Log.e(TAG, "onScrolled: NEW DATA TO LOAD");
                     ydy = dy;
                     card_offset = 0;
                     pers_card_offset = 0;
-                    ///return;
                 }
                 swipeRefreshLayout.setRefreshing(false);//end refresh animation
             }
@@ -248,16 +228,6 @@ public class MainActivity extends Activity {
     }
 
 
-    // Append the next page of data into the adapter
-    // This method probably sends out a network request and appends new data items to your adapter.
-    public void loadNextDataFromApi(int offset) {
-        // Send an API request to retrieve appropriate paginated data
-        //  --> Send the request including an offset value (i.e `page`) as a query parameter.
-        //  --> Deserialize and construct new model objects from the API response
-        //  --> Append the new data objects to the existing set of items inside the array of items
-        //  --> Notify the adapter of the new items made with `notifyDataSetChanged()`
-        readRandomFromFile("dadViceDB.txt", mRecyclerViewItems, ITEMS_PER_LOAD);
-    }
 
     /**
      * Adds Native Express ads to the items list.
@@ -354,6 +324,33 @@ public class MainActivity extends Activity {
         return_value = activeNetworkInfo != null;
         if(!return_value)Log.e("TESTSTRING", "No internet connection");
         return return_value;
+    }
+
+    //load new cards after scrolling down to threshold
+    private void loadDisplayNewDadvices(){
+        readRandomFromFile("dadViceDB.txt", mRecyclerViewItems, ITEMS_PER_LOAD);
+
+        //addFacebookShareButtons(); we will use this for fully functional share
+        buildFacebookShareButton();
+
+        //set up and load ads
+        if(isNetworkAvailable())
+        {
+            addNativeExpressAds();
+            setUpAndLoadNativeExpressAds();
+        }
+        // Specify adapter that supports cardview and adview
+        //This is inefficient but more readable code and since computation is cheap it's better to strive for readable
+        if(isNetworkAvailable())
+        {
+            RecyclerView.Adapter adapter = new RecyclerViewAdapter(this, mRecyclerViewItems);
+            mRecyclerView.setAdapter(adapter);
+        }
+        else
+        {
+            RecyclerView.Adapter adapternointernet = new RecyclerViewAdapterNoInternet(this, mRecyclerViewItems);
+            mRecyclerView.setAdapter(adapternointernet);
+        }
     }
 
     /*
