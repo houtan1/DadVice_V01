@@ -166,9 +166,6 @@ public class MainActivity extends Activity {
         final SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.recyclerViewSwipeLayout);
 
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            int ydy = 0;
-            int card_offset = 0;
-            int temp_offset = 0;
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
@@ -185,6 +182,8 @@ public class MainActivity extends Activity {
                     swipeRefreshLayout.setRefreshing(true);//start refresh animation
                     //Refresh to load data here.
                     readRandomFromFile("dadViceDB.txt", mRecyclerViewItems, ITEMS_PER_LOAD);
+                    //add ads to the next set of dadvices
+                    addNativeExpressAds();
                     mRecyclerView.getAdapter().notifyDataSetChanged();
                 }
                 swipeRefreshLayout.setRefreshing(false);//end refresh animation
@@ -218,7 +217,8 @@ public class MainActivity extends Activity {
         // Loop through the items array and place a new Native Express ad in every ith position in
         // the items List.
         int i;
-        for (i = 1; i <= mRecyclerViewItems.size(); i=i+1){;//i += ITEMS_PER_AD) {
+        Log.e("TEST","i="+(mRecyclerViewItems.size()-ITEMS_PER_LOAD+1));
+        for (i = (mRecyclerViewItems.size()-ITEMS_PER_LOAD+1); i <= mRecyclerViewItems.size(); i=i+1){;//i += ITEMS_PER_AD) {
             if(((i % ITEMS_PER_AD) == 0)&&(i>0)) {
                 final NativeExpressAdView adView = new NativeExpressAdView(MainActivity.this);
                 mRecyclerViewItems.add(i, adView);
