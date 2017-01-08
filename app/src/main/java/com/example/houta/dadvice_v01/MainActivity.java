@@ -49,7 +49,7 @@ import static android.content.ContentValues.TAG;
 
 public class MainActivity extends Activity {
     // A Native Express ad is placed in every nth position in the RecyclerView.
-    public static final int ITEMS_PER_AD = 3;
+    public static final int ITEMS_PER_AD = 10;
 
     // The Native Express ad height.
     private static final int NATIVE_EXPRESS_AD_HEIGHT = 150;
@@ -180,10 +180,14 @@ public class MainActivity extends Activity {
                 boolean shouldRefresh = mRecyclerView.canScrollVertically(1);
                 if (!shouldRefresh) {
                     swipeRefreshLayout.setRefreshing(true);//start refresh animation
+
                     //Refresh to load data here.
                     readRandomFromFile("dadViceDB.txt", mRecyclerViewItems, ITEMS_PER_LOAD);
                     //add ads to the next set of dadvices
-                    addNativeExpressAds();
+                    if(isNetworkAvailable()){
+                        addNativeExpressAds();
+                        setUpAndLoadNativeExpressAds();
+                    }
                     mRecyclerView.getAdapter().notifyDataSetChanged();
                 }
                 swipeRefreshLayout.setRefreshing(false);//end refresh animation
@@ -217,7 +221,7 @@ public class MainActivity extends Activity {
         // Loop through the items array and place a new Native Express ad in every ith position in
         // the items List.
         int i;
-        Log.e("TEST","i="+(mRecyclerViewItems.size()-ITEMS_PER_LOAD+1));
+        //Log.e("TEST","i="+(mRecyclerViewItems.size()-ITEMS_PER_LOAD+1));
         for (i = (mRecyclerViewItems.size()-ITEMS_PER_LOAD+1); i <= mRecyclerViewItems.size(); i=i+1){;//i += ITEMS_PER_AD) {
             if(((i % ITEMS_PER_AD) == 0)&&(i>0)) {
                 final NativeExpressAdView adView = new NativeExpressAdView(MainActivity.this);
@@ -239,7 +243,9 @@ public class MainActivity extends Activity {
             public void run() {
                 final float density = MainActivity.this.getResources().getDisplayMetrics().density;
                 // Set the ad size and ad unit ID for each Native Express ad in the items list.
+                //for (int i = (mRecyclerViewItems.size()-3*ITEMS_PER_AD-(mRecyclerViewItems.size()/ITEMS_PER_LOAD)); i <= mRecyclerViewItems.size(); i += ITEMS_PER_AD) {
                 for (int i = ITEMS_PER_AD; i <= mRecyclerViewItems.size(); i += ITEMS_PER_AD) {
+                    Log.e("SetAndLoad","i= "+i);
                     final NativeExpressAdView adView =
                             (NativeExpressAdView) mRecyclerViewItems.get(i);
                     AdSize adSize = new AdSize(
@@ -303,7 +309,6 @@ public class MainActivity extends Activity {
                 = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return_value = activeNetworkInfo != null;
-        if(!return_value)Log.e("TESTSTRING", "No internet connection");
         return return_value;
     }
 
