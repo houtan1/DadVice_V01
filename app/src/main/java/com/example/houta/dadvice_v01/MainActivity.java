@@ -49,7 +49,7 @@ import static android.content.ContentValues.TAG;
 
 public class MainActivity extends Activity {
     // A Native Express ad is placed in every nth position in the RecyclerView.
-    public static final int ITEMS_PER_AD = 10;
+    public static final int ITEMS_PER_AD = 3;
 
     // The Native Express ad height.
     private static final int NATIVE_EXPRESS_AD_HEIGHT = 150;
@@ -59,12 +59,6 @@ public class MainActivity extends Activity {
 
     //Number of cards to be loaded in recyclerview at a time
     private static final int ITEMS_PER_LOAD = ITEMS_PER_AD*3;
-
-    //store length of total scrolls
-    public static int pers_card_offset = 0;
-
-    //final scroll index before next load
-    public static final int scroll_limit = 300*ITEMS_PER_LOAD;  //467 is mathematical answer, error margin added
 
     // List of Native Express ads and MenuItems that populate the RecyclerView.
     private List<Object> mRecyclerViewItems;
@@ -186,22 +180,12 @@ public class MainActivity extends Activity {
                 super.onScrolled(recyclerView, dx, dy);
                 //scrolling down produces positive dy offset
 
-                temp_offset = dy - ydy;
-                ydy = dy;
-                card_offset = card_offset + temp_offset;
-                pers_card_offset = pers_card_offset + card_offset;
-                //Log.e(TAG, "onScrolled: FOUND IT" + pers_card_offset);
-                boolean shouldRefresh = (recyclerView.getScrollState() == RecyclerView.SCROLL_STATE_DRAGGING)
-                        && (pers_card_offset > scroll_limit);
-                if (shouldRefresh) {
+                boolean shouldRefresh = mRecyclerView.canScrollVertically(1);
+                if (!shouldRefresh) {
                     swipeRefreshLayout.setRefreshing(true);//start refresh animation
                     //Refresh to load data here.
-                    loadDisplayNewDadvices();
-
-                    Log.e(TAG, "onScrolled: NEW DATA TO LOAD");
-                    ydy = dy;
-                    card_offset = 0;
-                    pers_card_offset = 0;
+                    readRandomFromFile("dadViceDB.txt", mRecyclerViewItems, ITEMS_PER_LOAD);
+                    mRecyclerView.getAdapter().notifyDataSetChanged();
                 }
                 swipeRefreshLayout.setRefreshing(false);//end refresh animation
             }
@@ -321,34 +305,6 @@ public class MainActivity extends Activity {
         return_value = activeNetworkInfo != null;
         if(!return_value)Log.e("TESTSTRING", "No internet connection");
         return return_value;
-    }
-
-    //load new cards after scrolling down to threshold
-    private void loadDisplayNewDadvices(){
-        readRandomFromFile("dadViceDB.txt", mRecyclerViewItems, ITEMS_PER_LOAD);
-
-        //addFacebookShareButtons(); we will use this for fully functional share
-        ////buildFacebookShareButton();
-
-        //set up and load ads
-        if(isNetworkAvailable())
-        {
-            addNativeExpressAds();
-            setUpAndLoadNativeExpressAds();
-        }
-
-        // Specify adapter that supports cardview and adview
-        //This is inefficient but more readable code and since computation is cheap it's better to strive for readable
-        if(isNetworkAvailable())
-        {
-            RecyclerView.Adapter adapter = new RecyclerViewAdapter(this, mRecyclerViewItems);
-            mRecyclerView.setAdapter(adapter);
-        }
-        else
-        {
-            RecyclerView.Adapter adapternointernet = new RecyclerViewAdapterNoInternet(this, mRecyclerViewItems);
-            mRecyclerView.setAdapter(adapternointernet);
-        }
     }
 
     /*
