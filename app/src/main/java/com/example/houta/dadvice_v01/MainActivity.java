@@ -49,7 +49,7 @@ import static android.content.ContentValues.TAG;
 
 public class MainActivity extends Activity {
     // A Native Express ad is placed in every nth position in the RecyclerView.
-    public static final int ITEMS_PER_AD = 10;
+    public static final int ITEMS_PER_AD = 9;
 
     // The Native Express ad height.
     private static final int NATIVE_EXPRESS_AD_HEIGHT = 150;
@@ -71,6 +71,9 @@ public class MainActivity extends Activity {
 
     //private CardAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+
+    //Load ad index location for refreshView
+    private int adLoadIndex = ITEMS_PER_AD;
 
     /**
      * Bringing back the menu inflater and the about menu
@@ -224,6 +227,7 @@ public class MainActivity extends Activity {
         //Log.e("TEST","i="+(mRecyclerViewItems.size()-ITEMS_PER_LOAD+1));
         for (i = (mRecyclerViewItems.size()-ITEMS_PER_LOAD+1); i <= mRecyclerViewItems.size(); i=i+1){;//i += ITEMS_PER_AD) {
             if(((i % ITEMS_PER_AD) == 0)&&(i>0)) {
+                Log.e("ADDED_AD","Ad at index "+i);
                 final NativeExpressAdView adView = new NativeExpressAdView(MainActivity.this);
                 mRecyclerViewItems.add(i, adView);
             }
@@ -243,8 +247,9 @@ public class MainActivity extends Activity {
             public void run() {
                 final float density = MainActivity.this.getResources().getDisplayMetrics().density;
                 // Set the ad size and ad unit ID for each Native Express ad in the items list.
-                //for (int i = (mRecyclerViewItems.size()-3*ITEMS_PER_AD-(mRecyclerViewItems.size()/ITEMS_PER_LOAD)); i <= mRecyclerViewItems.size(); i += ITEMS_PER_AD) {
-                for (int i = ITEMS_PER_AD; i <= mRecyclerViewItems.size(); i += ITEMS_PER_AD) {
+                int i;
+                for (i = adLoadIndex; i <= mRecyclerViewItems.size(); i += ITEMS_PER_AD) {
+                //for (int i = ITEMS_PER_AD; i <= mRecyclerViewItems.size(); i += ITEMS_PER_AD) {
                     Log.e("SetAndLoad","i= "+i);
                     final NativeExpressAdView adView =
                             (NativeExpressAdView) mRecyclerViewItems.get(i);
@@ -254,6 +259,9 @@ public class MainActivity extends Activity {
                     adView.setAdSize(adSize);
                     adView.setAdUnitId(AD_UNIT_ID);
                 }
+                adLoadIndex = i;
+                Log.e("ADDED_AD","Saved adLoadIndex as "+adLoadIndex);
+
 
                 // Load the first Native Express ad in the items list.
                 loadNativeExpressAd(ITEMS_PER_AD);
