@@ -1,4 +1,4 @@
-package com.example.houta.dadvice_v01;
+package com.example.houta.dadvice;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

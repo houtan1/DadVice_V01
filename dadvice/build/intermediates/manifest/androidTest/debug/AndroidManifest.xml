@@ -12,5 +12,5 @@
                      android:targetPackage="com.example.houta.dadvice_v01"
                      android:handleProfiling="false"
                      android:functionalTest="false"
-                     android:label="Tests for com.example.houta.dadvice_v01"/>
+                     android:label="Tests for com.example.houta.dadvice"/>
 </manifest>

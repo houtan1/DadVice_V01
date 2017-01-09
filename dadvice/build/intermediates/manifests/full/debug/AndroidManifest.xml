@@ -14,7 +14,7 @@
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
     <permission
-        android:name="com.example.houta.dadvice_v01.permission.C2D_MESSAGE"
+        android:name="com.example.houta.dadvice.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
 
     <uses-permission android:name="com.example.houta.dadvice_v01.permission.C2D_MESSAGE" />
@@ -25,14 +25,14 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
-        <activity android:name="com.example.houta.dadvice_v01.MainActivity" >
+        <activity android:name="com.example.houta.dadvice.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.houta.dadvice_v01.AboutActivity" />
+        <activity android:name="com.example.houta.dadvice.AboutActivity" />
         <!-- Include the AdActivity and InAppPurchaseActivity configChanges and themes. -->
         <activity
             android:name="com.google.android.gms.ads.AdActivity"
@@ -66,7 +66,7 @@
 
         <provider
             android:name="com.google.firebase.provider.FirebaseInitProvider"
-            android:authorities="com.example.houta.dadvice_v01.firebaseinitprovider"
+            android:authorities="com.example.houta.dadvice.firebaseinitprovider"
             android:exported="false"
             android:initOrder="100" />
 
