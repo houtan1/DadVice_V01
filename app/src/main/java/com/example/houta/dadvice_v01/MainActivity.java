@@ -227,7 +227,6 @@ public class MainActivity extends Activity {
         //Log.e("TEST","i="+(mRecyclerViewItems.size()-ITEMS_PER_LOAD+1));
         for (i = (mRecyclerViewItems.size()-ITEMS_PER_LOAD+1); i <= mRecyclerViewItems.size(); i=i+1){;//i += ITEMS_PER_AD) {
             if(((i % ITEMS_PER_AD) == 0)&&(i>0)) {
-                Log.e("ADDED_AD","Ad at index "+i);
                 final NativeExpressAdView adView = new NativeExpressAdView(MainActivity.this);
                 mRecyclerViewItems.add(i, adView);
             }
@@ -249,8 +248,6 @@ public class MainActivity extends Activity {
                 // Set the ad size and ad unit ID for each Native Express ad in the items list.
                 int i;
                 for (i = adLoadIndex; i <= mRecyclerViewItems.size(); i += ITEMS_PER_AD) {
-                //for (int i = ITEMS_PER_AD; i <= mRecyclerViewItems.size(); i += ITEMS_PER_AD) {
-                    Log.e("SetAndLoad","i= "+i);
                     final NativeExpressAdView adView =
                             (NativeExpressAdView) mRecyclerViewItems.get(i);
                     AdSize adSize = new AdSize(
@@ -260,8 +257,6 @@ public class MainActivity extends Activity {
                     adView.setAdUnitId(AD_UNIT_ID);
                 }
                 adLoadIndex = i;
-                Log.e("ADDED_AD","Saved adLoadIndex as "+adLoadIndex);
-
 
                 // Load the first Native Express ad in the items list.
                 loadNativeExpressAd(ITEMS_PER_AD);
@@ -301,8 +296,6 @@ public class MainActivity extends Activity {
             public void onAdFailedToLoad(int errorCode) {
                 // The previous Native Express ad failed to load. Call this method again to load
                 // the next ad in the items list.
-                Log.e("MainActivity", "The previous Native Express ad failed to load. Attempting to"
-                        + " load the next Native Express ad in the items list.");
                 loadNativeExpressAd(index + ITEMS_PER_AD);
             }
         });
