@@ -49,7 +49,7 @@ import static android.content.ContentValues.TAG;
 
 public class MainActivity extends Activity {
     // A Native Express ad is placed in every nth position in the RecyclerView.
-    public static final int ITEMS_PER_AD = 3;
+    public static final int ITEMS_PER_AD = 9;
 
     // The Native Express ad height.
     private static final int NATIVE_EXPRESS_AD_HEIGHT = 150;
@@ -71,6 +71,9 @@ public class MainActivity extends Activity {
 
     //private CardAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+
+    //Load ad index location for refreshView
+    private int adLoadIndex = ITEMS_PER_AD;
 
     /**
      * Bringing back the menu inflater and the about menu
@@ -166,9 +169,6 @@ public class MainActivity extends Activity {
         final SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.recyclerViewSwipeLayout);
 
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            int ydy = 0;
-            int card_offset = 0;
-            int temp_offset = 0;
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
@@ -183,8 +183,14 @@ public class MainActivity extends Activity {
                 boolean shouldRefresh = mRecyclerView.canScrollVertically(1);
                 if (!shouldRefresh) {
                     swipeRefreshLayout.setRefreshing(true);//start refresh animation
+
                     //Refresh to load data here.
                     readRandomFromFile("dadViceDB.txt", mRecyclerViewItems, ITEMS_PER_LOAD);
+                    //add ads to the next set of dadvices
+                    if(isNetworkAvailable()){
+                        addNativeExpressAds();
+                        setUpAndLoadNativeExpressAds();
+                    }
                     mRecyclerView.getAdapter().notifyDataSetChanged();
                 }
                 swipeRefreshLayout.setRefreshing(false);//end refresh animation
@@ -218,8 +224,10 @@ public class MainActivity extends Activity {
         // Loop through the items array and place a new Native Express ad in every ith position in
         // the items List.
         int i;
-        for (i = 1; i <= mRecyclerViewItems.size(); i=i+1){;//i += ITEMS_PER_AD) {
+        //Log.e("TEST","i="+(mRecyclerViewItems.size()-ITEMS_PER_LOAD+1));
+        for (i = (mRecyclerViewItems.size()-ITEMS_PER_LOAD+1); i <= mRecyclerViewItems.size(); i=i+1){;//i += ITEMS_PER_AD) {
             if(((i % ITEMS_PER_AD) == 0)&&(i>0)) {
+                Log.e("ADDED_AD","Ad at index "+i);
                 final NativeExpressAdView adView = new NativeExpressAdView(MainActivity.this);
                 mRecyclerViewItems.add(i, adView);
             }
@@ -239,7 +247,10 @@ public class MainActivity extends Activity {
             public void run() {
                 final float density = MainActivity.this.getResources().getDisplayMetrics().density;
                 // Set the ad size and ad unit ID for each Native Express ad in the items list.
-                for (int i = ITEMS_PER_AD; i <= mRecyclerViewItems.size(); i += ITEMS_PER_AD) {
+                int i;
+                for (i = adLoadIndex; i <= mRecyclerViewItems.size(); i += ITEMS_PER_AD) {
+                //for (int i = ITEMS_PER_AD; i <= mRecyclerViewItems.size(); i += ITEMS_PER_AD) {
+                    Log.e("SetAndLoad","i= "+i);
                     final NativeExpressAdView adView =
                             (NativeExpressAdView) mRecyclerViewItems.get(i);
                     AdSize adSize = new AdSize(
@@ -248,6 +259,9 @@ public class MainActivity extends Activity {
                     adView.setAdSize(adSize);
                     adView.setAdUnitId(AD_UNIT_ID);
                 }
+                adLoadIndex = i;
+                Log.e("ADDED_AD","Saved adLoadIndex as "+adLoadIndex);
+
 
                 // Load the first Native Express ad in the items list.
                 loadNativeExpressAd(ITEMS_PER_AD);
@@ -303,7 +317,6 @@ public class MainActivity extends Activity {
                 = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return_value = activeNetworkInfo != null;
-        if(!return_value)Log.e("TESTSTRING", "No internet connection");
         return return_value;
     }
 
