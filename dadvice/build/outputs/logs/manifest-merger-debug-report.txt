@@ -56,7 +56,7 @@ MERGED from [com.google.firebase:firebase-core:9.4.0] /home/spencer/AndroidStudi
 		ADDED from /home/spencer/AndroidStudioProjects/GIT repos open cmd in here/dadvice/src/main/AndroidManifest.xml:9:9-43
 	android:theme
 		ADDED from /home/spencer/AndroidStudioProjects/GIT repos open cmd in here/dadvice/src/main/AndroidManifest.xml:12:9-40
-activity#com.example.houta.dadvice_v01.MainActivity
+activity#xyz.burritocat.dadvice.MainActivity
 ADDED from /home/spencer/AndroidStudioProjects/GIT repos open cmd in here/dadvice/src/main/AndroidManifest.xml:13:9-19:20
 	android:name
 		ADDED from /home/spencer/AndroidStudioProjects/GIT repos open cmd in here/dadvice/src/main/AndroidManifest.xml:13:19-47
@@ -70,7 +70,7 @@ category#android.intent.category.LAUNCHER
 ADDED from /home/spencer/AndroidStudioProjects/GIT repos open cmd in here/dadvice/src/main/AndroidManifest.xml:17:17-77
 	android:name
 		ADDED from /home/spencer/AndroidStudioProjects/GIT repos open cmd in here/dadvice/src/main/AndroidManifest.xml:17:27-74
-activity#com.example.houta.dadvice_v01.AboutActivity
+activity#xyz.burritocat.dadvice.AboutActivity
 ADDED from /home/spencer/AndroidStudioProjects/GIT repos open cmd in here/dadvice/src/main/AndroidManifest.xml:20:9-60
 	android:name
 		ADDED from /home/spencer/AndroidStudioProjects/GIT repos open cmd in here/dadvice/src/main/AndroidManifest.xml:20:19-48

@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:127529431531:android:814afdc4dc8df49f",
         "android_client_info": {
-          "package_name": "com.example.houta.dadvice_v01"
+          "package_name": "xyz.burritocat.dadvice"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "127529431531-c0mg1tt430duh81vtglb9qadptobsoo4.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.houta.dadvice_v01",
+            "package_name": "xyz.burritocat.dadvice",
             "certificate_hash": "3E613D3D99DD68E1DC55AB46FB0D3A114C2F384C"
           }
         },

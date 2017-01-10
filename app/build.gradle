@@ -5,7 +5,7 @@ android {
     buildToolsVersion "24.0.2"
 
     defaultConfig {
-        applicationId "com.example.houta.dadvice_v01"
+        applicationId "xyz.burritocat.dadvice"
         minSdkVersion 21
         targetSdkVersion 24
         versionCode 1

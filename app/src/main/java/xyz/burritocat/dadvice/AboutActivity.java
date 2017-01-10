@@ -1,4 +1,4 @@
-package com.example.houta.dadvice_v01;
+package xyz.burritocat.dadvice;
 
 import android.app.Activity;
 //import android.content.Intent;
@@ -6,8 +6,6 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-
-import com.google.firebase.analytics.FirebaseAnalytics;
 //import android.view.ViewGroup;
 //import android.widget.TextView;
 

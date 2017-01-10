@@ -9,6 +9,6 @@ package dadvice.example.houta.dadvice_v01;
 
 public final class Manifest {
     public static final class permission {
-        public static final String C2D_MESSAGE="com.example.houta.dadvice_v01.permission.C2D_MESSAGE";
+        public static final String C2D_MESSAGE="com.example.houta.xyz.burritocat.dadvice.permission.C2D_MESSAGE";
     }
 }

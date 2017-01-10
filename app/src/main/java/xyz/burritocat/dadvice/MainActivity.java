@@ -1,4 +1,4 @@
-package com.example.houta.dadvice_v01;
+package xyz.burritocat.dadvice;
 
 //import android.app.ActionBar;
 import android.app.Activity;
@@ -8,7 +8,6 @@ import android.content.Intent;
 //import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.Uri;
 import android.os.Bundle;
 //import android.support.v7.app.AppCompatActivity;
 //import android.support.v7.widget.LinearLayoutCompat;
@@ -24,7 +23,6 @@ import android.view.MenuItem;
 //import android.widget.Button;
 //import android.widget.EditText;
 //import android.widget.ListView;
-import android.util.Log;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -35,17 +33,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
-import com.facebook.share.model.ShareLinkContent;
-import com.facebook.share.widget.ShareButton;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.NativeExpressAdView;
 import com.google.firebase.analytics.FirebaseAnalytics;
-
-import static android.content.ContentValues.TAG;
 
 public class MainActivity extends Activity {
     // A Native Express ad is placed in every nth position in the RecyclerView.
