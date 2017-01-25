@@ -15,6 +15,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 //import android.view.LayoutInflater;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 //import android.view.View;
@@ -45,9 +46,6 @@ public class MainActivity extends Activity {
 
     // The Native Express ad height.
     private static final int NATIVE_EXPRESS_AD_HEIGHT = 150;
-
-    // The Native Express ad unit ID.
-    private static final String AD_UNIT_ID = "ca-app-pub-9036948389286739/2010780002";
 
     //Number of cards to be loaded in recyclerview at a time
     private static final int ITEMS_PER_LOAD = ITEMS_PER_AD*3;
@@ -246,7 +244,7 @@ public class MainActivity extends Activity {
                             (int) (mRecyclerView.getWidth() / density),
                             NATIVE_EXPRESS_AD_HEIGHT);
                     adView.setAdSize(adSize);
-                    adView.setAdUnitId(AD_UNIT_ID);
+                    adView.setAdUnitId(readStringFromFile("app_id.txt"));
                 }
                 adLoadIndex = i;
 
@@ -302,6 +300,23 @@ public class MainActivity extends Activity {
                 = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return_value = activeNetworkInfo != null;
+        return return_value;
+    }
+
+    /*
+    This
+     */
+    private String readStringFromFile(String fileName) {
+        String return_value = "NOT FOUND";
+        BufferedReader reader;
+        try {
+            final InputStream file = getAssets().open(fileName);
+            reader = new BufferedReader(new InputStreamReader(file));
+            return_value = reader.readLine();
+            Log.e("TEST",return_value);
+        }catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
         return return_value;
     }
 
