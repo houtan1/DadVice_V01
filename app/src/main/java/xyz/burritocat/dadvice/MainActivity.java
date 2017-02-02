@@ -313,7 +313,6 @@ public class MainActivity extends Activity {
             final InputStream file = getAssets().open(fileName);
             reader = new BufferedReader(new InputStreamReader(file));
             return_value = reader.readLine();
-            //Log.e("TEST",return_value);
         }catch (IOException ioe) {
             ioe.printStackTrace();
         }
